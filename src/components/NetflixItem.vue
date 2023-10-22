@@ -10,10 +10,10 @@
         data-movie-id="438631"
       >
         <div
-          class="absolute inset-0 z-10 transition duration-300 ease-in-out bg-gradient-to-t from-black via-gray-900 to-transparent"
+          class="absolute inset-0 z-10 transition duration-300 ease-in-out bg-gradient-to-t from-black to-transparent"
         ></div>
         <div
-          class="relative w-56 h-80 cursor-pointer group z-10 px-10 py-10 space-y-6 movie_info"
+          class="relative w-56 h-72 cursor-pointer group z-10 px-10 py-10 space-y-6 movie_info"
           data-lity=""
           href="https://www.youtube.com/embed/aSHs224Dge0"
         >
@@ -61,7 +61,7 @@
           </div>
         </div>
         <img
-          class="absolute inset-0 transform w-full h-2/3 object-cover -translate-y-4"
+          class="absolute inset-0 transform w-full h-full object-cover -translate-y-4"
           :src="'http://localhost:8000/storage/' + card.image"
           style="filter: grayscale(0)"
         />

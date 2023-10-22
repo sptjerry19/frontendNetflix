@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import NetflixView from "../views/NetflixView.vue";
 import AddFilm from "../views/AddFilm.vue";
+import AddFilm2 from "../views/AddFilm2.vue";
 import FilmComponent from "../components/FilmComponent.vue";
+import CategoryView from "../views/CategoryView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,12 +21,13 @@ const router = createRouter({
     },
     {
       path: "/home/:id",
+      name: "Netflix Film",
       component: FilmComponent,
     },
     {
       path: "/categories",
       name: "Netflix Categories",
-      component: NetflixView,
+      component: CategoryView,
     },
     {
       path: "/create",

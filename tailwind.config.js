@@ -4,6 +4,9 @@ export default {
   theme: {
     minHeight: {
       "1/2": "500px",
+      24: "240px",
+      20: "200px",
+      full: "100vh",
     },
     extend: {},
   },

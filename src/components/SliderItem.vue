@@ -1,9 +1,9 @@
 <template>
   <section>
     <div class="w-full lg:w-11/12 relative ml-auto mr-auto">
-      <div class="h-full">
+      <div class="max-h-screen h-full">
         <img
-          class="w-full min-h-1/2 object-cover"
+          class="w-full max-h-screen min-h-1/2 object-cover"
           :src="'http://localhost:8000/storage/' + film.image"
           alt=""
         />

@@ -1,18 +1,12 @@
 <template>
-  <div class="bg-zinc-900 h-full">
+  <div class="bg-zinc-900 min-h-full">
     <NavbarView />
     <div class="pt-28">
       <div class="flex items-center justify-center p-12">
         <!-- Author: FormBold Team -->
         <!-- Learn More: https://formbold.com -->
         <div class="mx-auto w-full max-w-[550px] bg-white">
-          <form
-            class="py-6 px-9"
-            autocomplete="off"
-            @submit.prevent="createFilm"
-            method="POST"
-            enctype="multipart/form-data"
-          >
+          <form class="py-6 px-9" method="POST" @submit.prevent="uploadImage">
             <!-- title -->
             <div class="mb-5">
               <label
@@ -25,8 +19,15 @@
                 type="text"
                 name="title"
                 id="title"
+                :required="true"
+                v-model="title"
                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
+              <span
+                class="bg-red-500 border rounded-lg"
+                v-if="error.title != ''"
+                >{{ error.title }}</span
+              >
             </div>
             <!-- over view -->
             <div class="mb-5">
@@ -39,9 +40,15 @@
               <input
                 type="text"
                 name="over_view"
+                v-model="over_view"
                 id="over_view"
                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
+              <span
+                class="bg-red-500 border rounded-lg"
+                v-if="error.over_view != ''"
+                >{{ error.over_view }}</span
+              >
             </div>
             <!-- video -->
             <div class="mb-5">
@@ -52,16 +59,24 @@
                 url video:
               </label>
               <input
-                type="url"
+                type="text"
                 name="video"
+                v-model="video"
                 id="video"
                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
+              <span
+                class="bg-red-500 border rounded-lg"
+                v-if="error.video != ''"
+                >{{ error.video }}</span
+              >
             </div>
+            <!-- view -->
+
             <!-- category -->
             <div class="mb-5">
               <label
-                for="video"
+                for="category"
                 class="mb-3 block text-base font-medium text-[#07074D]"
               >
                 choose a country:
@@ -69,6 +84,7 @@
               <select
                 id="category"
                 name="category_id"
+                v-model="category_id"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
                 <option
@@ -86,12 +102,20 @@
                 Upload File
               </label>
 
+              <span
+                class="bg-red-500 border rounded-lg"
+                v-if="error.image != ''"
+                >{{ error.image }}</span
+              >
+
               <div class="mb-8">
                 <input
                   type="file"
+                  accept="image/*"
                   name="image"
                   id="file"
                   class="sr-only"
+                  :required="true"
                   @change="onFileChange"
                 />
                 <label
@@ -119,14 +143,14 @@
               </div>
 
               <div
-                v-if="file != ''"
+                v-if="this.image"
                 class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8"
               >
                 <div class="flex items-center justify-between">
                   <span
                     class="truncate pr-3 text-base font-medium text-[#07074D]"
                   >
-                    {{ file }}
+                    {{ this.image.name }}
                   </span>
                   <button class="text-[#07074D]">
                     <svg
@@ -177,37 +201,78 @@ import axios from "axios";
 export default {
   data() {
     return {
-      film: {
-        image: "",
-        category_id: 1,
-        over_view: "",
+      title: "",
+      image: null,
+      video: "",
+      over_view: "",
+      views: 100,
+      category_id: 1,
+      categories: [],
+      error: {
         title: "",
+        over_view: "",
+        image: null,
         video: "",
       },
-      categories: [],
     };
   },
   methods: {
     onFileChange(e) {
-      console.log(e.target.files[0]);
-      this.film.image = e.target.files[0];
+      this.image = e.target.files[0];
+      console.log(this.image.name);
     },
-    createFilm() {
+    uploadImage() {
+      const formData = new FormData();
+      formData.append("title", this.title);
+      formData.append("image", this.image);
+      formData.append("video", this.video);
+      formData.append("over_view", this.over_view);
+      formData.append("views", this.views);
+      formData.append("category_id", this.category_id);
+
+      console.log(formData.get("title"));
+
+      // Use Axios to make the HTTP POST request to the API
       axios
-        .post("http://127.0.0.1:8000/api/films", this.film)
-        .then((response) => {
-          console.log(response);
+        .post("http://127.0.0.1:8000/api/films", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         })
-        .catch((error) => console.log(error));
+        .then((response) => {
+          console.log(response.data);
+          // Reset the form
+          this.title = "";
+          this.image = null;
+          this.video = "";
+          this.over_view = "";
+          this.views = 100;
+          this.category_id = 1;
+        })
+        .catch((error) => {
+          console.log(error.response.data.errors);
+          const errors = error.response.data.errors;
+          this.error.title = errors.title;
+          this.error.over_view = errors.over_view;
+          this.error.image = errors.image;
+          this.error.video = errors.video;
+        });
+      // reset
+      this.error.title = "";
+      this.error.over_view = "";
+      this.error.image = null;
+      this.error.video = "";
     },
   },
-  mounted() {
+  created() {
     axios
       .get("http://127.0.0.1:8000/api/categories")
       .then((response) => {
         this.categories = response.data.data;
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>

@@ -1,7 +1,8 @@
 <template>
   <!-- new -->
   <header
-    class="backdrop-blur-md from-black to-zinc-900 fixed top-0 w-full z-30 bg-transparent transition-all pt-4"
+    class="from-black to-zinc-900 fixed top-0 w-full z-30 bg-transparent transition-all pt-4"
+    :class="{ 'backdrop-blur-md': $route.name !== 'Netflix Film' }"
   >
     <nav class="px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
       <router-link to="/">
