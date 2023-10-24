@@ -191,7 +191,7 @@
 </template>
 
 <script setup>
-import NavbarView from "./NavbarView.vue";
+import NavbarView from "../NavbarView.vue";
 </script>
 
 <script>

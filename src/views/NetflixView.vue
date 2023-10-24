@@ -1,7 +1,7 @@
 <template>
   <NavbarView />
-  <!-- <OverView /> -->
-  <BigVideoVue />
+  <OverView />
+  <!-- <BigVideoVue /> -->
   <div
     class="bg-zinc-900 pl-4 pt-10"
     v-for="category in categories"

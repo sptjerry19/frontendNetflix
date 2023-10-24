@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="w-full lg:w-11/12 relative ml-auto mr-auto">
+    <div class="w-full relative ml-auto mr-auto">
       <div class="max-h-screen h-full">
         <img
           class="w-full max-h-screen min-h-1/2 object-cover"
@@ -9,7 +9,7 @@
         />
       </div>
       <div
-        class="flex absolute left-0 top-0 bottom-0 bg-gradient-to-r from-zinc-900 to-transparent bg-transparent w-full"
+        class="flex absolute left-0 top-0 bottom-0 bg-gradient-to-t from-zinc-900 to-transparent bg-transparent w-full"
       >
         <div
           class="flex flex-col w-1/3 items-start justify-center ml-14 text-white"
@@ -49,7 +49,11 @@
 </template>
 
 <script>
+import VideoPlayer from "./videos/VideoPlayer.vue";
 export default {
+  components: {
+    VideoPlayer,
+  },
   props: {
     film: Object,
   },

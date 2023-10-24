@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import NetflixView from "../views/NetflixView.vue";
-import AddFilm from "../views/AddFilm.vue";
-import AddFilm2 from "../views/AddFilm2.vue";
+import AddFilm from "../views/admin/AddFilm.vue";
 import FilmComponent from "../components/FilmComponent.vue";
 import CategoryView from "../views/CategoryView.vue";
 import LogIn from "../views/users/LogIn.vue";
