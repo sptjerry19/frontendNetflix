@@ -5,6 +5,7 @@ import AddFilm from "../views/AddFilm.vue";
 import AddFilm2 from "../views/AddFilm2.vue";
 import FilmComponent from "../components/FilmComponent.vue";
 import CategoryView from "../views/CategoryView.vue";
+import LogIn from "../views/users/LogIn.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
       path: "/create",
       name: "Netflix Create",
       component: AddFilm,
+    },
+    {
+      path: "/login",
+      name: "Netflix Login",
+      component: LogIn,
     },
     {
       path: "/about",

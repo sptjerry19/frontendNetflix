@@ -5,13 +5,15 @@
       <div class="flex items-center justify-center p-12">
         <!-- Author: FormBold Team -->
         <!-- Learn More: https://formbold.com -->
-        <div class="mx-auto w-full max-w-[550px] bg-white">
+        <div
+          class="mx-auto w-full max-w-[550px] bg-zinc-800 shadow-zinc-700 shadow-lg"
+        >
           <form class="py-6 px-9" method="POST" @submit.prevent="uploadImage">
             <!-- title -->
             <div class="mb-5">
               <label
                 for="title"
-                class="mb-3 block text-base font-medium text-[#07074D]"
+                class="mb-3 block text-base font-medium text-white"
               >
                 Send files to this title:
               </label>
@@ -24,7 +26,7 @@
                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
               <span
-                class="bg-red-500 border rounded-lg"
+                class="text-red-500 text-xs italic"
                 v-if="error.title != ''"
                 >{{ error.title }}</span
               >
@@ -33,7 +35,7 @@
             <div class="mb-5">
               <label
                 for="over_view"
-                class="mb-3 block text-base font-medium text-[#07074D]"
+                class="mb-3 block text-base font-medium text-white"
               >
                 over view:
               </label>
@@ -45,7 +47,7 @@
                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
               <span
-                class="bg-red-500 border rounded-lg"
+                class="text-red-500 text-xs italic"
                 v-if="error.over_view != ''"
                 >{{ error.over_view }}</span
               >
@@ -54,7 +56,7 @@
             <div class="mb-5">
               <label
                 for="video"
-                class="mb-3 block text-base font-medium text-[#07074D]"
+                class="mb-3 block text-base font-medium text-white"
               >
                 url video:
               </label>
@@ -66,7 +68,7 @@
                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
               <span
-                class="bg-red-500 border rounded-lg"
+                class="text-red-500 text-xs italic"
                 v-if="error.video != ''"
                 >{{ error.video }}</span
               >
@@ -77,7 +79,7 @@
             <div class="mb-5">
               <label
                 for="category"
-                class="mb-3 block text-base font-medium text-[#07074D]"
+                class="mb-3 block text-base font-medium text-white"
               >
                 choose a country:
               </label>
@@ -98,12 +100,12 @@
             </div>
             <!-- image -->
             <div class="mb-6 pt-4">
-              <label class="mb-5 block text-xl font-semibold text-[#07074D]">
+              <label class="mb-5 block text-xl font-semibold text-white">
                 Upload File
               </label>
 
               <span
-                class="bg-red-500 border rounded-lg"
+                class="text-red-500 text-xs italic"
                 v-if="error.image != ''"
                 >{{ error.image }}</span
               >
@@ -123,9 +125,7 @@
                   class="relative flex max-h-[160px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
                 >
                   <div>
-                    <span
-                      class="mb-2 block text-xl font-semibold text-[#07074D]"
-                    >
+                    <span class="mb-2 block text-xl font-semibold text-white">
                       Drop image here
                     </span>
                     <span
@@ -134,7 +134,7 @@
                       Or
                     </span>
                     <span
-                      class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
+                      class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-white"
                     >
                       Browse
                     </span>
@@ -147,12 +147,10 @@
                 class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8"
               >
                 <div class="flex items-center justify-between">
-                  <span
-                    class="truncate pr-3 text-base font-medium text-[#07074D]"
-                  >
+                  <span class="truncate pr-3 text-base font-medium text-black">
                     {{ this.image.name }}
                   </span>
-                  <button class="text-[#07074D]">
+                  <button class="text-white">
                     <svg
                       width="10"
                       height="10"

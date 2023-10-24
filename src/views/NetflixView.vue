@@ -1,6 +1,7 @@
 <template>
   <NavbarView />
-  <OverView />
+  <!-- <OverView /> -->
+  <BigVideoVue />
   <div
     class="bg-zinc-900 pl-4 pt-10"
     v-for="category in categories"
@@ -18,6 +19,7 @@ import NetflixItem from "../components/NetflixItem.vue";
 import OverView from "../components/OverView.vue";
 import GitartItemVue from "../components/GitartItem.vue";
 import FooterComponent from "../components/FooterComponent.vue";
+import BigVideoVue from "../components/BigVideo.vue";
 </script>
 
 <script>

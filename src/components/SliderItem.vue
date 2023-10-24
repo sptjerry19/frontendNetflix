@@ -21,6 +21,7 @@
             <button
               class="flex items-center text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
+              @click="$emit('openFilm')"
             >
               <i
                 ><svg
@@ -51,6 +52,9 @@
 export default {
   props: {
     film: Object,
+  },
+  data() {
+    return {};
   },
 };
 </script>
