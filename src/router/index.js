@@ -5,6 +5,8 @@ import AddFilm from "../views/admin/AddFilm.vue";
 import FilmComponent from "../components/FilmComponent.vue";
 import CategoryView from "../views/CategoryView.vue";
 import LogIn from "../views/users/LogIn.vue";
+import RegisTer from "../views/users/RegisTer.vue";
+import Home from "../views/admin/Home.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,11 +35,31 @@ const router = createRouter({
       path: "/create",
       name: "Netflix Create",
       component: AddFilm,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token") === null) {
+          next({ name: "Netflix Login" });
+        } else next();
+      },
+    },
+    {
+      path: "/settings",
+      name: "Netflix settings",
+      component: Home,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token") === null) {
+          next({ name: "Netflix Login" });
+        } else next();
+      },
     },
     {
       path: "/login",
       name: "Netflix Login",
       component: LogIn,
+    },
+    {
+      path: "/register",
+      name: "Netflix Register",
+      component: RegisTer,
     },
     {
       path: "/about",

@@ -2,7 +2,7 @@
   <div
     class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
     style="
-      background-image: url('https://th.bing.com/th/id/R.6105538b97769e02e62a4778c3667e3b?rik=RO2VXO3t9Uftlg&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f06%2fBlack-And-Red-Background-HD.jpg&ehk=j8v12wZpNSjYUZTr9bvVfCklPe8wORbYVfepbovTKfk%3d&risl=&pid=ImgRaw&r=0');
+      background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/a73c4363-1dcd-4719-b3b1-3725418fd91d/1a5c57fd-7621-42e4-8488-e5ae84fe9ae5/VN-vi-20231016-popsignuptwoweeks-perspective_alpha_website_large.jpg');
     "
   >
     <div
@@ -27,22 +27,24 @@
           <h1 class="mb-2 text-2xl">Netflix</h1>
           <span class="text-gray-300">Enter Login Details</span>
         </div>
-        <form method="post">
+        <form method="POST" @submit.prevent="logIn">
+          <label for="">Email:</label>
           <div class="mb-4 text-lg">
             <input
               class="rounded-3xl border-none bg-red-600 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
               type="text"
               name="name"
-              placeholder="id@email.com"
+              v-model="email"
             />
           </div>
 
+          <label for="">Password:</label>
           <div class="mb-4 text-lg">
             <input
               class="rounded-3xl border-none bg-red-600 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
               type="Password"
               name="name"
-              placeholder="*********"
+              v-model="password"
             />
           </div>
           <div class="mt-8 flex justify-center text-lg text-black">
@@ -58,3 +60,52 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+import store from "vuex";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      error: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    logIn() {
+      const formData = new FormData();
+      formData.append("email", this.email);
+      formData.append("password", this.password);
+
+      // Use Axios to make the HTTP POST request to the API
+      axios
+        .post(this.$store.state.UrlServe + "/login", formData)
+        .then((response) => {
+          console.log(response.data.token);
+          this.$store.dispatch("saveToken", response.data.token);
+          localStorage.setItem("token", response.data.token);
+          this.$router.push({ path: "/home" });
+          // Reset the form
+          this.email = "";
+          this.password = "";
+        })
+        .catch((error) => {
+          console.log(error);
+          // const errors = error.response.data.errors;
+          // this.error.email = errors.email;
+          // this.error.password = errors.password;
+        });
+      // reset
+      this.error.email = "";
+      this.error.password = "";
+    },
+  },
+  mounted() {
+    console.log(this.$store.state.UrlServe);
+  },
+};
+</script>
