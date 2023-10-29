@@ -1,6 +1,8 @@
 <template>
-  <div class="bg-zinc-900 min-h-full">
-    <NavbarView />
+  <div
+    class="min-h-full bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/a73c4363-1dcd-4719-b3b1-3725418fd91d/1a5c57fd-7621-42e4-8488-e5ae84fe9ae5/VN-vi-20231016-popsignuptwoweeks-perspective_alpha_website_large.jpg')]"
+  >
+    <!-- <NavbarView /> -->
     <div class="pt-28">
       <div class="flex items-center justify-center p-12">
         <!-- Author: FormBold Team -->
@@ -8,7 +10,30 @@
         <div
           class="mx-auto w-full max-w-[550px] bg-zinc-800 shadow-zinc-700 shadow-lg"
         >
-          <form class="py-6 px-9" method="POST" @submit.prevent="uploadImage">
+          <form
+            class="pb-6 pt-10 px-9 relative"
+            method="POST"
+            @submit.prevent="updateFilm"
+          >
+            <button
+              class="absolute top-2 right-2 text-white hover:text-red-600"
+              @click="$router.back()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-10 h-10"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
             <!-- title -->
             <div class="mb-5">
               <label
@@ -178,6 +203,7 @@
 
             <div>
               <button
+                type="submit"
                 class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
               >
                 Send File
@@ -199,6 +225,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      token: localStorage.getItem("token"),
       title: "",
       image: null,
       video: "",
@@ -212,6 +239,7 @@ export default {
         image: null,
         video: "",
       },
+      id: this.$route.params.id,
     };
   },
   methods: {
@@ -219,7 +247,7 @@ export default {
       this.image = e.target.files[0];
       console.log(this.image.name);
     },
-    uploadImage() {
+    updateFilm() {
       const formData = new FormData();
       formData.append("title", this.title);
       formData.append("image", this.image);
@@ -227,14 +255,14 @@ export default {
       formData.append("over_view", this.over_view);
       formData.append("views", this.views);
       formData.append("category_id", this.category_id);
-
-      console.log(formData.get("title"));
+      formData.append("_method", "PUT");
 
       // Use Axios to make the HTTP POST request to the API
       axios
-        .post("http://127.0.0.1:8000/api/films", formData, {
+        .post("http://127.0.0.1:8000/api/films/" + this.id, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${this.token}`,
           },
         })
         .then((response) => {
@@ -248,7 +276,7 @@ export default {
           this.category_id = 1;
         })
         .catch((error) => {
-          console.log(error.response.data.errors);
+          console.log(error);
           const errors = error.response.data.errors;
           this.error.title = errors.title;
           this.error.over_view = errors.over_view;
@@ -267,6 +295,19 @@ export default {
       .get("http://127.0.0.1:8000/api/categories")
       .then((response) => {
         this.categories = response.data.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    axios
+      .get("http://127.0.0.1:8000/api/films/" + this.id)
+      .then((response) => {
+        this.title = response.data.data.title;
+        this.image = response.data.data.image;
+        this.video = response.data.data.video;
+        this.over_view = response.data.data.over_view;
+        this.views = response.data.data.views;
+        this.category_id = response.data.data.category_id;
       })
       .catch((error) => {
         console.log(error);

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute top-20 left-20 right-20 shadow-xl shadow-black duration-500 transition-all"
+    class="absolute top-10 left-40 right-40 shadow-xl shadow-black duration-500 transition-all"
   >
     <VideoPlayer :video="video" />
     <button

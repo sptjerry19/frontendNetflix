@@ -5,7 +5,7 @@
         class="px-6 flex items-center justify-between space-x-4 2xl:container"
       >
         <h5 hidden class="text-2xl text-gray-600 font-medium lg:block">
-          Dashboard
+          {{ name }}
         </h5>
         <button class="w-12 h-16 -mr-2 border-r lg:hidden">
           <svg
@@ -44,13 +44,15 @@
                   ></path>
                 </svg>
               </span>
-              <input
-                type="search"
-                name="leadingIcon"
-                id="leadingIcon"
-                placeholder="Search here"
-                class="w-full pl-14 pr-4 py-2.5 rounded-xl text-sm text-gray-600 outline-none border border-gray-300 focus:border-cyan-300 transition"
-              />
+              <form method="get">
+                <input
+                  type="search"
+                  name="a"
+                  id="leadingIcon"
+                  placeholder="Search here"
+                  class="w-full pl-14 pr-4 py-2.5 rounded-xl text-sm text-gray-600 outline-none border border-gray-300 focus:border-cyan-300 transition"
+                />
+              </form>
             </div>
           </div>
           <!--/search bar -->
@@ -109,3 +111,11 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    name,
+  },
+};
+</script>

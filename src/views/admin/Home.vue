@@ -7,8 +7,8 @@
         <a href="#" title="home">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
-            class="w-32"
-            alt="tailus logo"
+            class=""
+            alt="netflix logo"
           />
         </a>
       </div>
@@ -27,14 +27,14 @@
 
       <ul class="space-y-2 tracking-wide mt-8">
         <li>
-          <a
-            href="#"
+          <router-link
+            to="/settings"
             aria-label="dashboard"
             class="relative px-4 py-3 flex items-center space-x-4 rounded-xl"
             @click="isActive = 'dashboard'"
             :class="{
               'text-white bg-gradient-to-r from-sky-600 to-cyan-400':
-                isActive === 'dashboard',
+                $route.name === 'Netflix settings',
             }"
           >
             <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
@@ -52,16 +52,16 @@
               ></path>
             </svg>
             <span class="-mr-1 font-medium">Dashboard</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a
-            href="#"
+          <router-link
+            to="/settings/categories"
             class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
             @click="isActive = 'categories'"
             :class="{
               'text-white bg-gradient-to-r from-sky-600 to-cyan-400':
-                isActive === 'categories',
+                $route.name === 'Netflix setting Categories',
             }"
           >
             <svg
@@ -82,11 +82,11 @@
               />
             </svg>
             <span class="group-hover:text-gray-700">Categories</span>
-          </a>
+          </router-link>
         </li>
-        <li>
-          <a
-            href="#"
+        <!-- <li>
+          <router-link
+            to="/settings/films"
             class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
             @click="isActive = 'films'"
             :class="{
@@ -112,8 +112,8 @@
               />
             </svg>
             <span class="group-hover:text-gray-700">Films</span>
-          </a>
-        </li>
+          </router-link>
+        </li> -->
       </ul>
     </div>
 
@@ -141,14 +141,6 @@
       </router-link>
     </div>
   </aside>
-
-  <!-- search bar -->
-  <SearchBar />
-
-  <!-- contents -->
-  <DashBoard v-if="isActive === 'dashboard'" />
-  <Categories v-else-if="isActive === 'categories'" />
-  <FilmTable v-else />
 </template>
 
 <script setup>

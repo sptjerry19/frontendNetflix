@@ -1,10 +1,12 @@
 <template>
   <!-- new -->
+  <!-- :class="{ 'backdrop-blur-md': $route.name !== 'Netflix Film' }" -->
   <header
-    class="from-black to-zinc-900 fixed top-0 w-full z-30 bg-transparent transition-all pt-4"
-    :class="{ 'backdrop-blur-md': $route.name !== 'Netflix Film' }"
+    class="fixed top-0 w-full z-30 bg-transparent pt-4"
+    :class="[!isTop && 'backdrop-blur-md']"
     @mouseleave="isOpenSetting = false"
   >
+    <!-- <div class="header__overlay absolute inset-0 w-full h-full"></div> -->
     <nav class="px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
       <router-link to="/">
         <NetFlix />
@@ -203,6 +205,7 @@ export default {
       selectList: ["Home", "Categories", "About", "Add Video"],
       isOpenSetting: false,
       tokenStorage: localStorage.getItem("token"),
+      isTop: true,
     };
   },
   methods: {
@@ -224,8 +227,16 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+    handleScroll() {
+      this.isTop = window.scrollY === 0;
+    },
   },
-  mounted() {},
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   computed: {},
 };
 </script>

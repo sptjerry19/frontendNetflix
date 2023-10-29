@@ -1,15 +1,28 @@
 <template>
   <div>
     <vue-plyr>
-      <div data-plyr-provider="youtube" data-plyr-embed-id="bTqVqk7FSmY"></div>
+      <div class="plyr__video-embed player">
+        <iframe
+          :src="video + '?autoplay=1&mute=1'"
+          allowfullscreen
+          allowtransparency
+          allow="autoplay"
+        ></iframe>
+      </div>
     </vue-plyr>
   </div>
 </template>
 
+<script></script>
 <script>
 export default {
   props: {
     video: String,
+  },
+  data() {
+    return {
+      src: `${this.video}?autoplay=1&mute=1`,
+    };
   },
 };
 </script>

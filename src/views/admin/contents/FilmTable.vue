@@ -1,7 +1,30 @@
 <template>
+  <Home />
+  <SearchBar :name="$route.name" />
   <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] w-40">
     <div class="px-6 pt-6 2xl:container">
-      <table class="border-collapse">
+      <router-link to="/create" class="ml-2"
+        ><ButtonTrans1Vue :name="'Create Film'"
+      /></router-link>
+      <div class="flex justify-center">
+        <form method="get">
+          <button @click.prevent="filerCategory(0)">
+            <ButtonDefault :name="'all'" />
+          </button>
+        </form>
+        <form method="get" v-for="category in categories" :key="category.id">
+          <input
+            class="hidden"
+            type=" hidden"
+            name="category"
+            :value="category.id"
+          />
+          <button @click.prevent="filerCategory(category.id, category.name)">
+            <ButtonDefault :name="category.name" />
+          </button>
+        </form>
+      </div>
+      <table class="mt-2 border-collapse max-w-full">
         <thead>
           <tr>
             <th
@@ -32,7 +55,7 @@
             <th
               class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
             >
-              category_id
+              category
             </th>
             <th
               class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
@@ -53,7 +76,7 @@
               {{ film.id }}
             </td>
             <td
-              class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
+              class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
               <img
                 class="h-44 w-full object-cover transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
@@ -64,12 +87,12 @@
             <td
               class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              <span class="rounded bg-red-400 py-1 px-3 text-xs font-bold">{{
+              <span class="rounded py-1 px-3 text-xs font-bold">{{
                 film.video
               }}</span>
             </td>
             <td
-              class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
+              class="w-1/6 lg:w-auto font-bold p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
               {{ film.title }}
             </td>
@@ -81,33 +104,53 @@
             <td
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              {{ film.category_id }}
+              {{ film.name || category }}
             </td>
             <td
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              <a href="#" class="text-blue-400 hover:text-blue-600 underline"
-                >Edit</a
+              <router-link
+                :to="'/update/' + film.id"
+                class="text-blue-400 hover:text-blue-600 underline"
+                >Edit</router-link
               >
-              <a
-                href="#"
-                class="text-blue-400 hover:text-blue-600 underline pl-6"
-                >Remove</a
+              <button
+                class="text-red-400 hover:text-red-600 underline pl-6"
+                @click="removeFilm(film.id)"
               >
+                Remove
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
+      <Paginate :pages="page" @change-page="changePage" />
     </div>
   </div>
 </template>
 
+<script setup>
+import Home from "../Home.vue";
+import ButtonDefault from "../../../components/buttons/ButtonDefault.vue";
+import Paginate from "../../../components/Paginate.vue";
+</script>
+
 <script>
+import SearchBar from "./SearchBar.vue";
 import axios from "axios";
+import ButtonTrans1Vue from "../../../components/buttons/ButtonTrans1.vue";
 export default {
+  components: {
+    ButtonTrans1Vue,
+    SearchBar,
+  },
   data() {
     return {
       films: [],
+      categories: [],
+      token: localStorage.getItem("token"),
+      category: "",
+      page: 1,
     };
   },
   created() {
@@ -118,10 +161,61 @@ export default {
         params: { a: this.$route.query.a },
       })
       .then((response) => {
-        this.films = response.data.data;
+        this.page = response.data.data.last_page;
+        this.films = response.data.data.data;
         console.log(this.films);
       })
       .catch(() => console.log(console.error()));
+
+    axios
+      .get("http://127.0.0.1:8000/api/categories")
+      .then((response) => {
+        this.categories = response.data.data;
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  },
+  methods: {
+    removeFilm(id) {
+      const api = this.$store.state.UrlServe + "/films/" + id;
+      axios
+        .delete(api, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .then((response) => window.location.reload())
+        .catch((error) => console.log(error));
+    },
+
+    filerCategory(id, name) {
+      let param = "?category=";
+      if (id === 0) {
+        param = "";
+        id = "";
+      }
+      const api = "http://127.0.0.1:8000/api/films" + param + id;
+      console.log(api);
+      axios
+        .get(api)
+        .then((response) => {
+          console.log(response);
+          this.films = response.data.data.data;
+          this.page = response.data.data.last_page;
+          this.category = name;
+        })
+        .catch(() => console.log(console.error()));
+    },
+    changePage(page) {
+      const apiPage = "http://127.0.0.1:8000/api/films?page=" + page;
+      axios
+        .get(apiPage)
+        .then((response) => {
+          this.films = response.data.data.data;
+        })
+        .catch(() => console.log(console.error()));
+    },
   },
 };
 </script>

@@ -1,6 +1,8 @@
 <template>
-  <div class="bg-zinc-900 min-h-full">
-    <NavbarView />
+  <div
+    class="min-h-full bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/a73c4363-1dcd-4719-b3b1-3725418fd91d/1a5c57fd-7621-42e4-8488-e5ae84fe9ae5/VN-vi-20231016-popsignuptwoweeks-perspective_alpha_website_large.jpg')]"
+  >
+    <!-- <NavbarView /> -->
     <div class="pt-28">
       <div class="flex items-center justify-center p-12">
         <!-- Author: FormBold Team -->
@@ -8,7 +10,30 @@
         <div
           class="mx-auto w-full max-w-[550px] bg-zinc-800 shadow-zinc-700 shadow-lg"
         >
-          <form class="py-6 px-9" method="POST" @submit.prevent="uploadImage">
+          <form
+            class="pb-6 pt-10 px-9 relative"
+            method="POST"
+            @submit.prevent="uploadImage"
+          >
+            <button
+              class="absolute top-2 right-2 text-white hover:text-red-600"
+              @click="$router.back()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-10 h-10"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
             <!-- title -->
             <div class="mb-5">
               <label
@@ -178,6 +203,7 @@
 
             <div>
               <button
+                type="submit"
                 class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
               >
                 Send File
@@ -199,6 +225,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      token: localStorage.getItem("token"),
       title: "",
       image: null,
       video: "",
@@ -235,6 +262,7 @@ export default {
         .post("http://127.0.0.1:8000/api/films", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${this.token}`,
           },
         })
         .then((response) => {
