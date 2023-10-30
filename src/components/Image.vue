@@ -16,7 +16,7 @@ export default {
     const { size, src } = props;
 
     return {
-      source: `http://localhost:8000/storage/${src}`,
+      source: `https://netflixbyjerry.000webhostapp.com/storage/${src}`,
     };
   },
 };

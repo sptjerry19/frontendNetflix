@@ -63,6 +63,7 @@ export default {
       films: [],
       categories: [],
       noResult: "ko co ket qua nao",
+      api: this.$store.state.UrlServe,
       pages: 1,
     };
   },
@@ -73,7 +74,7 @@ export default {
         param = "";
         id = "";
       }
-      const api = "http://127.0.0.1:8000/api/films" + param + id;
+      const api = this.$store.state.UrlServe + param + id;
       console.log(api);
       axios
         .get(api)
@@ -83,7 +84,7 @@ export default {
         .catch(() => console.log(console.error()));
     },
     changePage(page) {
-      const apiPage = "http://127.0.0.1:8000/api/films?page=" + page;
+      const apiPage = this.$store.state.UrlServe + "/films?page=" + page;
       axios
         .get(apiPage)
         .then((response) => {
@@ -94,7 +95,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/films", {
+      .get(this.$store.state.UrlServe + "/films", {
         params: { a: this.$route.query.a },
       })
       .then((response) => {
@@ -104,7 +105,7 @@ export default {
       .catch(() => console.log(console.error()));
 
     axios
-      .get("http://127.0.0.1:8000/api/categories")
+      .get(this.$store.state.UrlServe + "/categories")
       .then((response) => {
         this.categories = response.data.data;
       })

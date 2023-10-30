@@ -259,7 +259,7 @@ export default {
 
       // Use Axios to make the HTTP POST request to the API
       axios
-        .post("http://127.0.0.1:8000/api/films/" + this.id, formData, {
+        .post(this.$store.state.UrlServe + "/films/" + this.id, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${this.token}`,
@@ -292,7 +292,7 @@ export default {
   },
   created() {
     axios
-      .get("http://127.0.0.1:8000/api/categories")
+      .get(this.$store.state.UrlServe + "/categories")
       .then((response) => {
         this.categories = response.data.data;
       })
@@ -300,7 +300,7 @@ export default {
         console.log(error);
       });
     axios
-      .get("http://127.0.0.1:8000/api/films/" + this.id)
+      .get(this.$store.state.UrlServe + "/films/" + this.id)
       .then((response) => {
         this.title = response.data.data.title;
         this.image = response.data.data.image;

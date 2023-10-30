@@ -51,7 +51,7 @@ export default {
   },
   created() {
     axios
-      .get("http://127.0.0.1:8000/api/films/" + this.$route.params.id)
+      .get(this.$store.state.UrlServe + "/films/" + this.$route.params.id)
       .then((response) => {
         this.films = response.data.data;
         console.log(response);
