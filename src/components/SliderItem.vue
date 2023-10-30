@@ -4,7 +4,9 @@
       <div class="max-h-screen h-full">
         <img
           class="w-full max-h-3/4 min-h-1/2 object-cover"
-          :src="'http://localhost:8000/storage/' + film.image"
+          :src="
+            'https://jerrynetflixapp.000webhostapp.com/storage/' + film.image
+          "
           alt=""
         />
       </div>
