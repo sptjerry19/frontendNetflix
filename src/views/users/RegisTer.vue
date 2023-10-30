@@ -58,3 +58,53 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+import store from "vuex";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      error: {
+        name: "",
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    logIn() {
+      const formData = new FormData();
+      formData.append("email", this.email);
+      formData.append("password", this.password);
+
+      // Use Axios to make the HTTP POST request to the API
+      axios
+        .post(this.$store.state.UrlServe + "/login", formData)
+        .then((response) => {
+          console.log(response.data.token);
+          this.$store.dispatch("saveToken", response.data.token);
+          localStorage.setItem("token", response.data.token);
+          this.$router.push({ path: "/home" });
+          // Reset the form
+          this.email = "";
+          this.password = "";
+        })
+        .catch((error) => {
+          console.log(error);
+          // const errors = error.response.data.errors;
+          // this.error.email = errors.email;
+          // this.error.password = errors.password;
+        });
+      // reset
+      this.error.email = "";
+      this.error.password = "";
+    },
+  },
+  mounted() {
+    console.log(this.$store.state.UrlServe);
+  },
+};
+</script>
