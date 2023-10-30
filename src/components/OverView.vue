@@ -2,7 +2,7 @@
   <div class="w-full bg-zinc-900 relative">
     <img
       class="w-full max-h-3/4 min-h-1/2 object-cover"
-      :src="`http://localhost:8000/storage/${src}`"
+      :src="`https://jerrynetflixapp.000webhostapp.com/storage/${src}`"
       alt=""
     />
     <div

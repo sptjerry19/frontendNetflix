@@ -37,7 +37,10 @@
               class="z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 opacity-80 transition duration-300 ease-in-out group-hover:opacity-100 dark:border-gray-700 dark:opacity-70"
             >
               <img
-                :src="'http://localhost:8000/storage/' + film.image"
+                :src="
+                  'https://jerrynetflixapp.000webhostapp.com/storage/' +
+                  film.image
+                "
                 class="animate-fade-in block h-full w-full scale-100 transform object-cover opacity-100 transition duration-300 group-hover:scale-110"
                 alt=""
               />
