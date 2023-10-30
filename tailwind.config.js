@@ -8,7 +8,16 @@ export default {
       20: "200px",
       full: "100vh",
     },
-    extend: {},
+    maxHeight: {
+      "3/4": "80vh",
+    },
+    extend: {
+      backgroundImage: {
+        "hero-pattern":
+          "url('https://assets.nflxext.com/ffe/siteui/vlv3/a73c4363-1dcd-4719-b3b1-3725418fd91d/1a5c57fd-7621-42e4-8488-e5ae84fe9ae5/VN-vi-20231016-popsignuptwoweeks-perspective_alpha_website_large.jpg')",
+        "footer-texture": "url('/img/footer-texture.png')",
+      },
+    },
   },
   plugins: [],
 };

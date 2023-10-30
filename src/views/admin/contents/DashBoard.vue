@@ -1,4 +1,6 @@
 <template>
+  <Home />
+  <SearchBar :name="$route.name" />
   <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
     <div class="px-6 pt-6 2xl:container">
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -779,3 +781,14 @@
     </div>
   </div>
 </template>
+
+<script>
+import Home from "../Home.vue";
+import SearchBar from "./SearchBar.vue";
+export default {
+  components: {
+    Home,
+    SearchBar,
+  },
+};
+</script>

@@ -1,9 +1,13 @@
 <template>
   <div class="w-80 h-52 mx-3">
-    <img
+    <!-- <img
       class="h-44 w-full object-cover transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
       :src="'http://localhost:8000/storage/' + card.image"
       style="filter: grayscale(0)"
+    /> -->
+    <Image
+      class="h-44 w-full object-cover transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
+      :src="card.image"
     />
     <div class="">
       <h3 class="text-white">
@@ -12,6 +16,10 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import Image from "./Image.vue";
+</script>
 
 <script>
 export default {

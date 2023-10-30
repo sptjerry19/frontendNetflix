@@ -4,6 +4,7 @@ import { createStore } from "vuex";
 const store = createStore({
   state: {
     UrlServe: "http://127.0.0.1:8000/api",
+    urlStorage: "http://127.0.0.1:8000/storage/",
     token: null,
     isAuthenticated: false,
   },

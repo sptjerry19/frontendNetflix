@@ -3,7 +3,7 @@
     <div class="w-full relative ml-auto mr-auto">
       <div class="max-h-screen h-full">
         <img
-          class="w-full max-h-screen min-h-1/2 object-cover"
+          class="w-full max-h-3/4 min-h-1/2 object-cover"
           :src="'http://localhost:8000/storage/' + film.image"
           alt=""
         />
@@ -14,9 +14,11 @@
         <div
           class="flex flex-col w-1/3 items-start justify-center ml-14 text-white"
         >
-          <h1 class="text-6xl font-semibold py-4">{{ film.title }}</h1>
+          <h1 class="lg:text-6xl md:text-3xl font-semibold py-4">
+            {{ film.title }}
+          </h1>
           <p class="opacity-60 py-4">2023 | {{ film.name }}</p>
-          <p>{{ film.over_view }}</p>
+          <p class="md:text-base md:block hidden">{{ film.over_view }}</p>
           <div class="mt-8">
             <button
               class="flex items-center text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

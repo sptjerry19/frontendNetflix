@@ -1,41 +1,44 @@
 <template>
-  <NavbarView />
-  <OverView />
-  <!-- list category -->
-  <div class="flex justify-center bg-zinc-900 py-4">
-    <form method="get">
-      <button @click.prevent="filerCategory(0)">
-        <ButtonDefault :name="'all'" />
-      </button>
-    </form>
-    <form method="get" v-for="category in categories" :key="category.id">
-      <input
-        class="hidden"
-        type=" hidden"
-        name="category"
-        :value="category.id"
-      />
-      <button @click.prevent="filerCategory(category.id)">
-        <ButtonDefault :name="category.name" />
-      </button>
-    </form>
-  </div>
-  <!-- overflow-x-auto whitespace-nowrap scroll-smooth custom-scrollbar focus:scroll-auto bg-zinc-900 -->
-  <div class="flex justify-center items-center flex-wrap bg-zinc-900">
-    <div class="mx-6 my-6" v-for="item in films" :key="item.id">
-      <router-link :to="'/home/' + item.id">
-        <netflix-item :card="item" />
-      </router-link>
+  <div class="h-screen bg-zinc-900">
+    <NavbarView />
+    <!-- <OverView /> -->
+    <!-- list category -->
+    <div class="flex pt-40 justify-center bg-zinc-900 py-4">
+      <form method="get">
+        <button @click.prevent="filerCategory(0)">
+          <ButtonDefault :name="'all'" />
+        </button>
+      </form>
+      <form method="get" v-for="category in categories" :key="category.id">
+        <input
+          class="hidden"
+          type=" hidden"
+          name="category"
+          :value="category.id"
+        />
+        <button @click.prevent="filerCategory(category.id)">
+          <ButtonDefault :name="category.name" />
+        </button>
+      </form>
     </div>
+    <!-- overflow-x-auto whitespace-nowrap scroll-smooth custom-scrollbar focus:scroll-auto bg-zinc-900 -->
+    <div class="flex justify-center items-center flex-wrap bg-zinc-900">
+      <div class="mx-6 my-6" v-for="item in films" :key="item.id">
+        <router-link :to="'/home/' + item.id">
+          <netflix-item :card="item" />
+        </router-link>
+      </div>
+    </div>
+    <!-- no result -->
+    <h1
+      class="bg-zinc-900 text-white text-center text-6xl"
+      v-if="films.length === 0"
+    >
+      {{ noResult }}
+    </h1>
+    <Paginate :pages="pages" @change-page="changePage" />
+    <FooterComponent />
   </div>
-  <!-- no result -->
-  <h1
-    class="bg-zinc-900 text-white text-center text-6xl"
-    v-if="films.length === 0"
-  >
-    {{ noResult }}
-  </h1>
-  <FooterComponent />
 </template>
 
 <script setup>
@@ -44,6 +47,7 @@ import NetflixItem from "../components/NetflixItem.vue";
 import OverView from "../components/OverView.vue";
 import ButtonDefault from "../components/buttons/ButtonDefault.vue";
 import FooterComponent from "../components/FooterComponent.vue";
+import Paginate from "../components/Paginate.vue";
 import CategoryItem from "../components/CategoryItem.vue";
 import GitartItemVue from "../components/GitartItem.vue";
 </script>
@@ -59,6 +63,8 @@ export default {
       films: [],
       categories: [],
       noResult: "ko co ket qua nao",
+      api: this.$store.state.UrlServe,
+      pages: 1,
     };
   },
   methods: {
@@ -68,31 +74,40 @@ export default {
         param = "";
         id = "";
       }
-      const api = "http://127.0.0.1:8000/api/films" + param + id;
+      const api = this.$store.state.UrlServe + param + id;
       console.log(api);
       axios
         .get(api)
         .then((response) => {
-          this.films = response.data.data;
+          this.films = response.data.data.data;
+        })
+        .catch(() => console.log(console.error()));
+    },
+    changePage(page) {
+      const apiPage = this.$store.state.UrlServe + "/films?page=" + page;
+      axios
+        .get(apiPage)
+        .then((response) => {
+          this.films = response.data.data.data;
         })
         .catch(() => console.log(console.error()));
     },
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/films", {
+      .get(this.$store.state.UrlServe + "/films", {
         params: { a: this.$route.query.a },
       })
       .then((response) => {
-        this.films = response.data.data;
+        this.pages = response.data.data.last_page;
+        this.films = response.data.data.data;
       })
       .catch(() => console.log(console.error()));
 
     axios
-      .get("http://127.0.0.1:8000/api/categories")
+      .get(this.$store.state.UrlServe + "/categories")
       .then((response) => {
         this.categories = response.data.data;
-        console.log(response);
       })
       .catch((error) => console.log(error));
   },

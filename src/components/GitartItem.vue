@@ -68,13 +68,13 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/films", {
+      .get(this.$store.state.UrlServe + "/films", {
         params: {
           category: this.categoryId,
         },
       })
       .then((response) => {
-        this.listfilm = response.data.data;
+        this.listfilm = response.data.data.data;
         console.log(this.listfilm);
       })
       .catch((error) => {
@@ -84,7 +84,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 button.carousel__next.carousel__next--disabled {
   color: red;
 }

@@ -36,10 +36,22 @@ export default {
       isOpenFilm: false,
     };
   },
-  methods: {},
+  methods: {
+    handleOpenFilm() {
+      this.isOpenFilm = true;
+      const modal = document.querySelector(".plyr__poster");
+      console.log(modal);
+      window.onclick = function (event) {
+        console.log(event.target);
+        if (event.target == modal) {
+          console.log("close modal");
+        }
+      };
+    },
+  },
   created() {
     axios
-      .get("http://127.0.0.1:8000/api/films/" + this.$route.params.id)
+      .get(this.$store.state.UrlServe + "/films/" + this.$route.params.id)
       .then((response) => {
         this.films = response.data.data;
         console.log(response);

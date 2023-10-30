@@ -29,7 +29,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:8000/api/categories")
+      .get(this.$store.state.UrlServe + "/categories")
       .then((response) => {
         this.categories = response.data.data;
       })
