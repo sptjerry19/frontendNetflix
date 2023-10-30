@@ -210,22 +210,24 @@ export default {
   },
   methods: {
     logOut() {
-      const api = this.$store.state.UrlServe + "/logout";
-      const token = this.tokenStorage;
-      axios
-        .post(api, null, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          this.$store.state.tokenUser = "";
-          this.$store.state.isAuthenticated = false;
-          localStorage.removeItem("token");
-          this.$router.push("/");
-        })
-        .catch((error) => console.log(error));
+      // const api = this.$store.state.UrlServe + "/logout";
+      // const token = this.tokenStorage;
+      localStorage.removeItem("token");
+      this.$router.push("/");
+      // axios
+      //   .post(api, null, {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   })
+      //   .then((response) => {
+      //     this.$store.state.tokenUser = "";
+      //     this.$store.state.isAuthenticated = false;
+      //     localStorage.removeItem("token");
+      //     this.$router.push("/");
+      //   })
+      //   .catch((error) => console.log(error));
     },
     handleScroll() {
       this.isTop = window.scrollY === 0;

@@ -3,8 +3,8 @@ import { createStore } from "vuex";
 // Create a new store instance.
 const store = createStore({
   state: {
-    UrlServe: "http://127.0.0.1:8000/api",
-    urlStorage: "http://127.0.0.1:8000/storage/",
+    UrlServe: "https://jerrynetflixapp.000webhostapp.com/api",
+    urlStorage: "https://jerrynetflixapp.000webhostapp.com/storage/",
     token: null,
     isAuthenticated: false,
   },

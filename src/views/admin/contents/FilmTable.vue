@@ -87,7 +87,7 @@
             <td
               class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              <span class="rounded py-1 px-3 text-xs font-bold">{{
+              <span class="rounded py-1 px-3 text-xs font-bold break-all">{{
                 film.video
               }}</span>
             </td>

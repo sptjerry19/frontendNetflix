@@ -27,12 +27,43 @@
           <h1 class="mb-2 text-2xl">Netflix</h1>
           <span class="text-gray-300">Enter Login Details</span>
         </div>
-        <form method="post">
+        <form method="post" @submit.prevent="regisTer">
+          <button
+            class="absolute top-2 right-2 text-white hover:text-red-600"
+            @click="$router.back()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-10 h-10"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
           <div class="mb-4 text-lg">
             <input
               class="rounded-3xl border-none bg-red-600 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
               type="text"
               name="name"
+              v-model="name"
+              placeholder="user name"
+            />
+          </div>
+
+          <div class="mb-4 text-lg">
+            <input
+              class="rounded-3xl border-none bg-red-600 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+              type="text"
+              name="email"
+              v-model="email"
               placeholder="id@email.com"
             />
           </div>
@@ -41,7 +72,8 @@
             <input
               class="rounded-3xl border-none bg-red-600 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
               type="Password"
-              name="name"
+              name="password"
+              v-model="password"
               placeholder="*********"
             />
           </div>
@@ -65,6 +97,7 @@ import store from "vuex";
 export default {
   data() {
     return {
+      name: "",
       email: "",
       password: "",
       error: {
@@ -75,20 +108,22 @@ export default {
     };
   },
   methods: {
-    logIn() {
+    regisTer() {
       const formData = new FormData();
+      formData.append("name", this.name);
       formData.append("email", this.email);
       formData.append("password", this.password);
 
       // Use Axios to make the HTTP POST request to the API
       axios
-        .post(this.$store.state.UrlServe + "/login", formData)
+        .post(this.$store.state.UrlServe + "/register", formData)
         .then((response) => {
           console.log(response.data.token);
           this.$store.dispatch("saveToken", response.data.token);
           localStorage.setItem("token", response.data.token);
           this.$router.push({ path: "/home" });
           // Reset the form
+          this.name = "";
           this.email = "";
           this.password = "";
         })

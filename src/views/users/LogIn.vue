@@ -28,6 +28,25 @@
           <span class="text-gray-300">Enter Login Details</span>
         </div>
         <form method="POST" @submit.prevent="logIn">
+          <button
+            class="absolute top-2 right-2 text-white hover:text-red-600"
+            @click="$router.back()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-10 h-10"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
           <label for="">Email:</label>
           <div class="mb-4 text-lg">
             <input

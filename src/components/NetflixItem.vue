@@ -62,9 +62,7 @@
         </div>
         <img
           class="absolute inset-0 transform w-full h-full object-cover -translate-y-4"
-          :src="
-            'https://netflixbyjerry.000webhostapp.com/storage/' + card.image
-          "
+          :src="$store.state.urlStorage + card.image"
           style="filter: grayscale(0)"
         />
       </div>
