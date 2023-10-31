@@ -74,7 +74,7 @@ export default {
         param = "";
         id = "";
       }
-      const api = this.$store.state.UrlServe + param + id;
+      const api = this.$store.state.UrlServe + "/films" + param + id;
       console.log(api);
       axios
         .get(api)
