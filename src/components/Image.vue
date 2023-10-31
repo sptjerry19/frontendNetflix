@@ -12,13 +12,10 @@ export default {
     },
   },
 
-  setup(props) {
-    const { size, src } = props;
-    // const storage = this.$store.state.urlStorage;
-
+  data() {
     return {
-      source: `https://jerrynetflixapp.000webhostapp.com/storage/${src}`,
-    };
+      source: this.$store.state.urlStorage + this.src,
+    }
   },
 };
 </script>
