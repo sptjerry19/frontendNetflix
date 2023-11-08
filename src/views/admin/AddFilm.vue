@@ -276,10 +276,10 @@ export default {
         .catch((error) => {
           console.log(error.response.data.errors);
           const errors = error.response.data.errors;
-          this.error.title = errors.title;
-          this.error.over_view = errors.over_view;
-          this.error.image = errors.image;
-          this.error.video = errors.video;
+          // this.error.title = errors.title;
+          // this.error.over_view = errors.over_view;
+          // this.error.image = errors.image;
+          // this.error.video = errors.video;
         });
       // reset
       this.error.title = "";

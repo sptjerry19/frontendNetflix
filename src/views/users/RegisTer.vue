@@ -77,13 +77,14 @@
               placeholder="*********"
             />
           </div>
-          <div class="mt-8 flex justify-center text-lg text-black">
+          <div class="mt-8 flex justify-center text-lg text-black items-center">
             <button
               type="submit"
               class="rounded-3xl bg-red-800 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-red-500"
             >
-              Login
+              Register
             </button>
+            <router-link to="/login" class="text-white ml-3">Login</router-link>
           </div>
         </form>
       </div>
