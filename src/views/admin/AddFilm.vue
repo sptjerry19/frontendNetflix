@@ -127,11 +127,11 @@
                 Upload File
               </label>
 
-              <span
+              <!-- <span
                 class="text-red-500 text-xs italic"
                 v-if="error.image != ''"
                 >{{ error.image }}</span
-              >
+              > -->
 
               <div class="mb-8">
                 <input
@@ -165,13 +165,12 @@
                 </label>
               </div>
 
-              <div
-                v-if="this.image"
-                class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8"
-              >
+              <!-- v-if="this.image" -->
+              <!-- {{ this.image.name }} -->
+              <div v-if="image" class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
                 <div class="flex items-center justify-between">
                   <span class="truncate pr-3 text-base font-medium text-black">
-                    {{ this.image.name }}
+                    {{ image.name }}
                   </span>
                   <button class="text-white">
                     <svg
@@ -234,7 +233,7 @@ export default {
       error: {
         title: "",
         over_view: "",
-        image: null,
+        // image: null,
         video: "",
       },
     };
@@ -274,8 +273,8 @@ export default {
           this.category_id = 1;
         })
         .catch((error) => {
-          console.log(error.response.data.errors);
-          const errors = error.response.data.errors;
+          console.log(error);
+          // const errors = error.response.data.errors;
           // this.error.title = errors.title;
           // this.error.over_view = errors.over_view;
           // this.error.image = errors.image;
@@ -284,7 +283,7 @@ export default {
       // reset
       this.error.title = "";
       this.error.over_view = "";
-      this.error.image = null;
+      // this.error.image = null;
       this.error.video = "";
     },
   },

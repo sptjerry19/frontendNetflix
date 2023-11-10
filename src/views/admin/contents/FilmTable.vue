@@ -177,7 +177,7 @@ export default {
   },
   methods: {
     removeFilm(id) {
-      const api = this.$store.state.UrlServe + "/films/" + id;
+      const api = this.$store.state.UrlServe + "/films/" + id + "/";
       axios
         .delete(api, {
           headers: {
@@ -187,6 +187,13 @@ export default {
         })
         .then((response) => window.location.reload())
         .catch((error) => console.log(error));
+      // fetch(api, {
+      //   method: "DELETE",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${this.token}`,
+      //   },
+      // }).then((response) => window.location.reload());
     },
 
     filerCategory(id, name) {
