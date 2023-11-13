@@ -2,11 +2,23 @@
   <section>
     <div class="w-full relative ml-auto mr-auto">
       <div class="max-h-screen h-full">
-        <img
+        <!-- <img
           class="w-full max-h-3/4 min-h-1/2 object-cover"
           :src="$store.state.urlStorage + film.image"
           alt=""
-        />
+        /> -->
+        <!-- <vue-plyr class="w-screen"> -->
+        <div class="w-screen">
+          <iframe
+            class="w-full min-h-72"
+            :src="film.video + '?autoplay=1&mute=1&controls=0'"
+            allowfullscreen
+            allowtransparency
+            allow="autoplay"
+            controls="false"
+          ></iframe>
+        </div>
+        <!-- </vue-plyr> -->
       </div>
       <div
         class="flex absolute left-0 top-0 bottom-0 bg-gradient-to-t from-zinc-900 to-transparent bg-transparent w-full"

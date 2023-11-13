@@ -6,7 +6,10 @@
     <div class="flex pt-40 justify-center bg-zinc-900 py-4">
       <form method="get">
         <button @click.prevent="filerCategory(0)">
-          <ButtonDefault :name="'all'" />
+          <ButtonDefault
+            class="bg-red-500 border-red-500 text-white hover:text-black"
+            :name="'all'"
+          />
         </button>
       </form>
       <form method="get" v-for="category in categories" :key="category.id">
@@ -17,7 +20,10 @@
           :value="category.id"
         />
         <button @click.prevent="filerCategory(category.id)">
-          <ButtonDefault :name="category.name" />
+          <ButtonDefault
+            class="bg-red-500 border-red-500 text-white hover:text-black"
+            :name="category.name"
+          />
         </button>
       </form>
     </div>

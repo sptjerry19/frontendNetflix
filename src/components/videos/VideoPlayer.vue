@@ -7,6 +7,7 @@
           allowfullscreen
           allowtransparency
           allow="autoplay"
+          controls="false"
         ></iframe>
       </div>
     </vue-plyr>
