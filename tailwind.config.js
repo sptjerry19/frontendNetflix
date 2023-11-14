@@ -6,7 +6,9 @@ export default {
       "1/2": "500px",
       24: "240px",
       20: "200px",
+      55: "550px",
       72: "720px",
+      85: "850px",
       full: "100vh",
     },
     maxHeight: {

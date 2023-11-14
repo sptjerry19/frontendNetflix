@@ -10,7 +10,7 @@
         <!-- <vue-plyr class="w-screen"> -->
         <div class="w-screen">
           <iframe
-            class="w-full min-h-72"
+            class="w-full md:min-h-72 lg:min-h-85 sm:min-h-55 h-96"
             :src="film.video + '?autoplay=1&mute=1&controls=0'"
             allowfullscreen
             allowtransparency
