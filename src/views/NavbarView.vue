@@ -65,7 +65,7 @@
       >
         <div class="relative text-lg bg-transparent text-red-800">
           <div class="flex items-center border-b border-red-500 py-2">
-            <form method="get" action="http://localhost:5173/categories">
+            <form method="get" action="/categories">
               <input
                 class="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none"
                 type="text"

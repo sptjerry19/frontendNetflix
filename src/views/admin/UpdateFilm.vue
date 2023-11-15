@@ -165,13 +165,10 @@
                 </label>
               </div>
 
-              <div
-                v-if="this.image"
-                class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8"
-              >
+              <div v-if="image" class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
                 <div class="flex items-center justify-between">
                   <span class="truncate pr-3 text-base font-medium text-black">
-                    {{ this.image.name }}
+                    {{ image }}
                   </span>
                   <button class="text-white">
                     <svg

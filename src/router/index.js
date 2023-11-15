@@ -12,6 +12,7 @@ import FilmTable from "../views/admin/contents/FilmTable.vue";
 import Categories from "../views/admin/contents/Categories.vue";
 import ImdbView from "../views/ImdbView.vue";
 import WeatherView from "../views/WeatherView.vue";
+import Genre from "../views/admin/contents/Genre.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -100,6 +101,16 @@ const router = createRouter({
       path: "/settings/categories",
       name: "Netflix setting Categories",
       component: Categories,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token") === null) {
+          next({ name: "Netflix Login" });
+        } else next();
+      },
+    },
+    {
+      path: "/settings/musics",
+      name: "Netflix setting musics",
+      component: Genre,
       beforeEnter: (to, from, next) => {
         if (localStorage.getItem("token") === null) {
           next({ name: "Netflix Login" });

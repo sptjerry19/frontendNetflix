@@ -8,10 +8,10 @@
           alt=""
         /> -->
         <!-- <vue-plyr class="w-screen"> -->
-        <div class="w-screen">
+        <div class="">
           <iframe
             class="w-full md:min-h-72 lg:min-h-85 sm:min-h-55 h-96"
-            :src="film.video + '?autoplay=1&mute=1&controls=0'"
+            :src="film.video + '?autoplay=1&controls=1&loop=1&mute=' + volume"
             allowfullscreen
             allowtransparency
             allow="autoplay"
@@ -63,16 +63,20 @@
 </template>
 
 <script>
+import ButtonDefaultVue from "./buttons/ButtonDefault.vue";
 import VideoPlayer from "./videos/VideoPlayer.vue";
 export default {
   components: {
     VideoPlayer,
+    ButtonDefaultVue,
   },
   props: {
     film: Object,
   },
   data() {
-    return {};
+    return {
+      volume: true,
+    };
   },
 };
 </script>
