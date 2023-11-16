@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute top-10 left-40 right-40 shadow-xl shadow-black duration-500 transition-all"
+    class="absolute m-auto left-0 right-0 top-20 lg:w-4/5 w-full shadow-xl shadow-black duration-500 transition-all"
   >
     <VideoPlayer :video="video" />
     <button

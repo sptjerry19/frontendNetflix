@@ -12,7 +12,9 @@ import FilmTable from "../views/admin/contents/FilmTable.vue";
 import Categories from "../views/admin/contents/Categories.vue";
 import ImdbView from "../views/ImdbView.vue";
 import WeatherView from "../views/WeatherView.vue";
-import Genre from "../views/admin/contents/Genre.vue";
+import GenreTable from "../views/admin/contents/GenreTable.vue";
+import SongTable from "../views/admin/contents/SongTable.vue";
+import SingerTable from "../views/admin/contents/SingerTable.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -108,9 +110,29 @@ const router = createRouter({
       },
     },
     {
+      path: "/settings/singers",
+      name: "Netflix setting singers",
+      component: SingerTable,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token") === null) {
+          next({ name: "Netflix Login" });
+        } else next();
+      },
+    },
+    {
+      path: "/settings/genres",
+      name: "Netflix setting genres",
+      component: GenreTable,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token") === null) {
+          next({ name: "Netflix Login" });
+        } else next();
+      },
+    },
+    {
       path: "/settings/musics",
       name: "Netflix setting musics",
-      component: Genre,
+      component: SongTable,
       beforeEnter: (to, from, next) => {
         if (localStorage.getItem("token") === null) {
           next({ name: "Netflix Login" });
