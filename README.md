@@ -27,3 +27,9 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### run preview for Production
+
+```sh
+npm run preview
+```
