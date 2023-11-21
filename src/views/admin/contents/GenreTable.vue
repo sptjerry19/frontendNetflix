@@ -3,11 +3,18 @@
   <SearchBar :name="$route.name" />
   <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
     <div class="px-6 pt-6 2xl:container">
-      <ButtonTrans1Vue @click="isOpenModal = true" :name="'Create Category'" />
+      <ButtonTrans1Vue @click="isOpenModal = true" :name="'Create genre'" />
       <ModalForm
         v-click-outside="onClickOutside"
         v-if="isOpenModal"
         @closeModal="isOpenModal = false"
+        :table="'genres'"
+      />
+      <updateGenre
+        v-if="isUpdateModal"
+        @closeModal="isUpdateModal = false"
+        :id="currentId"
+        :genreName="currentGenre"
       />
       <table class="mt-2 border-collapse w-11/12 max-w-full">
         <thead>
@@ -37,35 +44,42 @@
         <tbody>
           <tr
             class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
-            v-for="category in categories"
-            :key="category.id"
+            v-for="genre in genres"
+            :key="genre.id"
           >
             <td
               class="w-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              {{ category.id }}
+              {{ genre.id }}
             </td>
             <td
-              class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
+              class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static hover:cursor-pointer"
             >
-              {{ category.name }}
-            </td>
-            <td
-              class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
-            >
-              {{ moment(category.created_at).format("DD-MM-YYYY") }}
+              <router-link :to="'/genres/' + genre.id">
+                {{ genre.name }}
+              </router-link>
             </td>
             <td
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              <router-link
-                :to="'/update/category' + category.id"
+              {{ moment(genre.created_at).format("DD-MM-YYYY") }}
+            </td>
+            <td
+              class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
+            >
+              <button
                 class="text-blue-400 hover:text-blue-600 underline"
-                >Edit</router-link
+                @click="
+                  (currentId = genre.id),
+                    (currentGenre = genre.name),
+                    (isUpdateModal = true)
+                "
               >
+                Edit
+              </button>
               <button
                 class="text-red-400 hover:text-red-600 underline pl-6"
-                @click="removeCategory(category.id)"
+                @click="removeGenre(genre.id)"
               >
                 Remove
               </button>
@@ -83,6 +97,7 @@ import SearchBar from "./SearchBar.vue";
 import ModalForm from "../../../components/modals/modalForm.vue";
 import axios from "axios";
 import ButtonTrans1Vue from "../../../components/buttons/ButtonTrans1.vue";
+import updateGenre from "../../../components/modals/updateGenre.vue";
 </script>
 
 <script>
@@ -94,9 +109,12 @@ export default {
   },
   data() {
     return {
-      categories: [],
+      genres: [],
       moment: moment,
       isOpenModal: false,
+      isUpdateModal: false,
+      currentId: 0,
+      currentGenre: "",
       token: localStorage.getItem("token"),
     };
   },
@@ -105,7 +123,7 @@ export default {
     axios
       .get(api)
       .then((response) => {
-        this.categories = response.data.data;
+        this.genres = response.data.data;
         console.log(response);
       })
       .catch((error) => console.log(error));

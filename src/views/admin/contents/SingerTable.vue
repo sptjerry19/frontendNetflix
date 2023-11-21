@@ -101,7 +101,7 @@ export default {
     };
   },
   created() {
-    const api = this.$store.state.UrlServe + "/genre";
+    const api = this.$store.state.UrlServe + "/singers";
     axios
       .get(api)
       .then((response) => {

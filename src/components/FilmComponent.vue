@@ -9,7 +9,7 @@
           : (isOpenFilm = false)
       "
     />
-    <GitartItem :categoryId="films.category_id" />
+    <GitartItem :categoryId="films.category_id" @click="changeFilm()" />
     <video-component
       v-if="isOpenFilm"
       :video="films.video"
@@ -84,6 +84,18 @@ export default {
         console.log(this.view);
       })
       .catch(() => console.log(console.error()));
+  },
+  methods: {
+    changeFilm() {
+      axios
+        .get(this.$store.state.UrlServe + "/films/" + this.$route.params.id)
+        .then((response) => {
+          this.films = response.data.data;
+          this.view = this.films.views;
+          console.log(this.view);
+        })
+        .catch(() => console.log(console.error()));
+    },
   },
 };
 </script>

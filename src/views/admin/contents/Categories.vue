@@ -8,6 +8,7 @@
         v-click-outside="onClickOutside"
         v-if="isOpenModal"
         @closeModal="isOpenModal = false"
+        :table="'categories'"
       />
       <table class="mt-2 border-collapse w-11/12 max-w-full">
         <thead>

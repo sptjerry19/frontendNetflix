@@ -15,6 +15,9 @@ import WeatherView from "../views/WeatherView.vue";
 import GenreTable from "../views/admin/contents/GenreTable.vue";
 import SongTable from "../views/admin/contents/SongTable.vue";
 import SingerTable from "../views/admin/contents/SingerTable.vue";
+import SongIndex from "../views/songs/SongIndex.vue";
+import GenreShow from "../views/genres/GenreShow.vue";
+import GenreIndex from "../views/genres/GenreIndex.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,6 +67,23 @@ const router = createRouter({
       path: "/weather",
       name: "weather",
       component: WeatherView,
+    },
+
+    //song
+    {
+      path: "/music",
+      name: "music",
+      component: GenreIndex,
+    },
+    {
+      path: "/songs",
+      name: "songs",
+      component: SongIndex,
+    },
+    {
+      path: "/genres/:id",
+      name: "genre",
+      component: GenreShow,
     },
 
     // Admin

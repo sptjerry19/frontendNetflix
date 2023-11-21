@@ -14,13 +14,13 @@
         />
       </div>
       <div>
-        <div class="font-semibold text-2xl pb-4">Create a {{ table }}</div>
+        <div class="font-semibold text-2xl pb-4">Update {{ genreName }}</div>
       </div>
       <div>
         <form
           class="flex flex-col space-y-8"
           method="POST"
-          @submit.prevent="createData"
+          @submit.prevent="updateGenre(id)"
         >
           <div class="flex flex-col gap-y-8 h-12 space-x-2 w-auto">
             <input
@@ -29,14 +29,14 @@
               v-model="name"
               required
               class="bg-transparent border-2 rounded-full py-4 px-6 text-[16px] leading-[22.4px] font-light placeholder:text-white text-white"
-              :placeholder="table"
+              placeholder="new genre"
             />
           </div>
           <button
             type="submit"
             class="max-w-[200px] h-auto rounded-full bg-white text-black py-3 px-6"
           >
-            <span class="text-teal-900 font-semibold">Create</span>
+            <span class="text-teal-900 font-semibold">Update</span>
           </button>
         </form>
       </div>
@@ -48,7 +48,10 @@
 import axios from "axios";
 export default {
   props: {
-    table: {
+    id: {
+      type: Number,
+    },
+    genreName: {
       type: String,
     },
   },
@@ -59,14 +62,15 @@ export default {
     };
   },
   methods: {
-    createData() {
-      const api = this.$store.state.UrlServe + "/" + this.table + "/";
-      const fomrData = new FormData();
-      fomrData.append("name", this.name);
+    updateGenre(id) {
+      const api = this.$store.state.UrlServe + "/genres/" + id;
+      const jsonData = {
+        name: this.name,
+      };
       axios
-        .post(api, fomrData, {
+        .put(api, jsonData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${this.token}`,
           },
         })

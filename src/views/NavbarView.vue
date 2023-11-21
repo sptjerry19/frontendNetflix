@@ -51,13 +51,13 @@
           >IMDB</router-link
         >
         <router-link
-          to="/create"
+          to="/music"
           :class="{
             'text-red-700': $route.name === 'Netflix Create',
             'text-white': $route.name !== 'Netflix Create',
           }"
           class="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative hover:text-red-700"
-          >Create Video</router-link
+          >Musics</router-link
         >
       </ul>
       <div
@@ -65,7 +65,7 @@
       >
         <div class="relative text-lg bg-transparent text-red-800">
           <div class="flex items-center border-b border-red-500 py-2">
-            <form method="get" action="/categories">
+            <form method="get" action="">
               <input
                 class="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none"
                 type="text"

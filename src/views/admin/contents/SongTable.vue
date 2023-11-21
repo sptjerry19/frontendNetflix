@@ -4,7 +4,7 @@
   <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] w-40">
     <div class="px-6 pt-6 2xl:container">
       <router-link to="/create" class="ml-2"
-        ><ButtonTrans1Vue :name="'Create Film'"
+        ><ButtonTrans1Vue :name="'Create song'"
       /></router-link>
       <div class="flex justify-center">
         <form method="get">
@@ -12,7 +12,7 @@
             <ButtonDefault :name="'all'" />
           </button>
         </form>
-        <form method="get" v-for="category in categories" :key="category.id">
+        <form method="get" v-for="category in genres" :key="category.id">
           <input
             class="hidden"
             type=" hidden"
@@ -24,7 +24,7 @@
           </button>
         </form>
       </div>
-      <table class="mt-2 border-collapse max-w-full">
+      <table class="mt-2 border-collapse max-w-full w-full">
         <thead>
           <tr>
             <th
@@ -40,12 +40,12 @@
             <th
               class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
             >
-              name
+              audio
             </th>
             <th
               class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
             >
-              audio
+              name
             </th>
             <th
               class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
@@ -67,20 +67,20 @@
         <tbody>
           <tr
             class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
-            v-for="film in films"
-            :key="film.id"
+            v-for="song in songs"
+            :key="song.id"
           >
             <td
               class="w-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              {{ film.id }}
+              {{ song.id }}
             </td>
             <td
               class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
               <img
                 class="h-44 w-full object-cover transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
-                :src="$store.state.urlStorage + film.image"
+                :src="$store.state.urlStorage + song.image"
                 style="filter: grayscale(0)"
               />
             </td>
@@ -88,35 +88,35 @@
               class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
               <span class="rounded py-1 px-3 text-xs font-bold break-all">{{
-                film.video
+                song.audio
               }}</span>
             </td>
             <td
               class="w-1/6 lg:w-auto font-bold p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              {{ film.title }}
+              {{ song.name }}
             </td>
             <td
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              {{ film.over_view }}
+              {{ song.singer_name }}
             </td>
             <td
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              {{ film.name || category }}
+              {{ song.genre_name || category }}
             </td>
             <td
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
               <router-link
-                :to="'/update/' + film.id"
+                :to="'/update/' + song.id"
                 class="text-blue-400 hover:text-blue-600 underline"
                 >Edit</router-link
               >
               <button
                 class="text-red-400 hover:text-red-600 underline pl-6"
-                @click="removeFilm(film.id)"
+                @click="removesong(song.id)"
               >
                 Remove
               </button>
@@ -146,38 +146,38 @@ export default {
   },
   data() {
     return {
-      films: [],
-      categories: [],
+      songs: [],
+      genres: [],
       token: localStorage.getItem("token"),
       category: "",
       page: 1,
     };
   },
   created() {
-    const api = this.$store.state.UrlServe + "/films";
+    const api = this.$store.state.UrlServe + "/songs";
     console.log(api);
     axios
       .get(api, {
         params: { a: this.$route.query.a },
       })
       .then((response) => {
-        this.page = response.data.data.last_page;
-        this.films = response.data.data.data;
-        console.log(this.films);
+        this.page = response.data.last_page;
+        this.songs = response.data.data;
+        console.log(this.songs);
       })
       .catch(() => console.log(console.error()));
 
     axios
-      .get(this.$store.state.UrlServe + "/categories")
+      .get(this.$store.state.UrlServe + "/genres")
       .then((response) => {
-        this.categories = response.data.data;
+        this.genres = response.data.data;
         console.log(response);
       })
       .catch((error) => console.log(error));
   },
   methods: {
-    removeFilm(id) {
-      const api = this.$store.state.UrlServe + "/films/" + id + "/";
+    removesong(id) {
+      const api = this.$store.state.UrlServe + "/songs/" + id + "/";
       axios
         .delete(api, {
           headers: {
@@ -197,29 +197,29 @@ export default {
     },
 
     filerCategory(id, name) {
-      let param = "?category=";
+      let param = "?genre=";
       if (id === 0) {
         param = "";
         id = "";
       }
-      const api = this.$store.state.UrlServe + "/films" + param + id;
+      const api = this.$store.state.UrlServe + "/songs" + param + id;
       console.log(api);
       axios
         .get(api)
         .then((response) => {
           console.log(response);
-          this.films = response.data.data.data;
+          this.songs = response.data.data;
           this.page = response.data.data.last_page;
           this.category = name;
         })
         .catch(() => console.log(console.error()));
     },
     changePage(page) {
-      const apiPage = this.$store.state.UrlServe + "/films?page=" + page;
+      const apiPage = this.$store.state.UrlServe + "/songs?page=" + page;
       axios
         .get(apiPage)
         .then((response) => {
-          this.films = response.data.data.data;
+          this.songs = response.data.data.data;
         })
         .catch(() => console.log(console.error()));
     },
