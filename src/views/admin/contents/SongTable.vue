@@ -3,7 +3,7 @@
   <SearchBar :name="$route.name" />
   <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] w-40">
     <div class="px-6 pt-6 2xl:container">
-      <router-link to="/create" class="ml-2"
+      <router-link to="/create/song" class="ml-2"
         ><ButtonTrans1Vue :name="'Create song'"
       /></router-link>
       <div class="flex justify-center">
@@ -154,7 +154,7 @@ export default {
     };
   },
   created() {
-    const api = this.$store.state.UrlServe + "/songs";
+    const api = this.$store.state.UrlServe + "/songs/all";
     console.log(api);
     axios
       .get(api, {
