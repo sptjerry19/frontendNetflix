@@ -18,6 +18,8 @@ import SingerTable from "../views/admin/contents/SingerTable.vue";
 import SongIndex from "../views/songs/SongIndex.vue";
 import GenreShow from "../views/genres/GenreShow.vue";
 import GenreIndex from "../views/genres/GenreIndex.vue";
+import CreateSong from "../views/admin/CreateSong.vue";
+import CreateSinger from "../views/admin/CreateSinger.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -159,6 +161,29 @@ const router = createRouter({
         } else next();
       },
     },
+
+    // songs
+    {
+      path: "/create/song",
+      name: "Create Song",
+      component: CreateSong,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token") === null) {
+          next({ name: "Netflix Login" });
+        } else next();
+      },
+    },
+    {
+      path: "/create/singer",
+      name: "Create Singer",
+      component: CreateSinger,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token") === null) {
+          next({ name: "Netflix Login" });
+        } else next();
+      },
+    },
+
     // {
     //   path: "/settings/films",
     //   name: "Netflix settingFilms",
