@@ -74,18 +74,6 @@ export default {
       //   }
       // };
     },
-  },
-  created() {
-    axios
-      .get(this.$store.state.UrlServe + "/films/" + this.$route.params.id)
-      .then((response) => {
-        this.films = response.data.data;
-        this.view = this.films.views;
-        console.log(this.view);
-      })
-      .catch(() => console.log(console.error()));
-  },
-  methods: {
     changeFilm() {
       axios
         .get(this.$store.state.UrlServe + "/films/" + this.$route.params.id)
@@ -96,6 +84,16 @@ export default {
         })
         .catch(() => console.log(console.error()));
     },
+  },
+  created() {
+    axios
+      .get(this.$store.state.UrlServe + "/films/" + this.$route.params.id)
+      .then((response) => {
+        this.films = response.data.data;
+        this.view = this.films.views;
+        console.log(this.view);
+      })
+      .catch(() => console.log(console.error()));
   },
 };
 </script>

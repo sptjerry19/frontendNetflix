@@ -8,7 +8,7 @@
     </div>
     <div class="flex flex-wrap">
       <div
-        class="bg-zinc-900 p-4 flex justify-center items-center mb-4"
+        class="bg-zinc-900 p-4 flex justify-center items-center mb-8"
         v-for="song in songs"
         :key="song.id"
       >
@@ -32,9 +32,6 @@
         </div>
       </div>
     </div>
-    <p class="text-white text-center mb-8 hover:text-red-500">
-      <router-link to="/songs">show more ></router-link>
-    </p>
   </div>
 </template>
 
@@ -64,12 +61,12 @@ export default {
         console.log(error);
       });
     axios
-      .get(this.$store.state.UrlServe + "/songs/top10", {
+      .get(this.$store.state.UrlServe + "/songs/all", {
         params: { linit: this.$route.query.linit },
       })
       .then((response) => {
         console.log(response.data);
-        this.songs = response.data;
+        this.songs = response.data.data;
       })
       .catch((error) => console.log(error));
   },

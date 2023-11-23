@@ -17,7 +17,7 @@
       ></path>
     </svg>
     <div>
-      <span class="font-medium">Success alert!</span> Song created successfully
+      <span class="font-medium">Success alert!</span> Song updated successfully
     </div>
   </div>
   <div class="grid min-h-full place-items-center backgroundImage">
@@ -55,10 +55,9 @@
           accept="image/*"
           name="image"
           id="file_image"
-          :required="true"
           @change="onFileChange"
         />
-        <img :src="imagePreview" alt="" />
+        <img :src="imagePreview || $store.state.urlStorage + image" alt="" />
         <label
           for="audio"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
@@ -71,7 +70,10 @@
           @change="handleAudioFileChange"
         />
         <audio id="audioPlayer" controls>
-          <source src="" type="audio/mpeg" />
+          <source
+            :src="audioPreview || $store.state.urlStorage + audio"
+            type="audio/mpeg"
+          />
         </audio>
         <label
           for="password-confirm"
@@ -112,7 +114,7 @@
           type="submit"
           class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
         >
-          create song
+          update song
         </button>
       </form>
     </div>
@@ -132,10 +134,20 @@ export default {
       genres: [],
       selectedGenres: [],
       imagePreview: null,
+      audioPreview: null,
       isSuccessModal: false,
     };
   },
-
+  created() {
+    const api = this.$store.state.UrlServe;
+    axios.get(api + "/songs/" + this.$route.params.id).then((response) => {
+      console.log(response.data[0].audio);
+      this.name = response.data[0].name;
+      this.image = response.data[0].image;
+      this.audio = response.data[0].audio;
+      this.singer_id = response.data[0].singer_id;
+    });
+  },
   mounted() {
     const api = this.$store.state.UrlServe;
     axios.get(api + "/genres").then((response) => {
@@ -150,14 +162,12 @@ export default {
   methods: {
     onFileChange(e) {
       this.image = e.target.files[0];
-      console.log(this.image.name);
       this.imagePreview = URL.createObjectURL(this.image);
-      console.log(this.imagePreview);
     },
     handleAudioFileChange(event) {
       this.audio = event.target.files[0];
-      const audioURL = URL.createObjectURL(this.audio);
-      document.getElementById("audioPlayer").src = audioURL;
+      const audioPreview = URL.createObjectURL(this.audio);
+      document.getElementById("audioPlayer").src = audioPreview;
     },
     handleSubmit() {
       const data = {
@@ -168,13 +178,18 @@ export default {
         genres: this.selectedGenres,
       };
       axios
-        .post(this.$store.state.UrlServe + "/songs", data, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Accept: "application/json",
-            Authorization: `Bearer ${this.$store.state.token}`,
-          },
-        })
+        .put(
+          this.$store.state.UrlServe + "/songs/" + this.$route.params.id,
+          data,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              "Content-Type": "application/x-www-form-urlencoded",
+              Accept: "application/json",
+              Authorization: `Bearer ${this.$store.state.token}`,
+            },
+          }
+        )
         .then((response) => {
           console.log("Song created successfully");
           this.isSuccessModal = true;

@@ -1,49 +1,42 @@
 <template>
   <div class="flex flex-col w-screen h-screen bg-zinc-900">
     <NavbarView />
-    <div class="mt-20">
-      <div class="flex justify-center bg-zinc-900 pt-8">
-        <router-link
-          v-for="genre in genres"
-          :key="genre.id"
-          :to="'/genres/' + genre.id"
-          @click="changeGenre(genre.id)"
-        >
-          <ButtonDefault
-            class="bg-red-500 border-red-500 text-white hover:text-black"
-            :name="genre.name"
-          />
-        </router-link>
-      </div>
-      <div class="flex flex-col p-5">
-        <div class="border-b pb-1 flex justify-between items-center mb-2">
-          <span class="text-base font-semibold uppercase text-gray-700">
-            play list</span
-          >
-          <img
-            class="w-4 cursor-pointer"
-            src="https://p.kindpng.com/picc/s/152-1529312_filter-ios-filter-icon-png-transparent-png.png"
-          />
-        </div>
-
+    <div class="flex pt-40 justify-center bg-zinc-900 py-4">
+      <router-link
+        v-for="genre in genres"
+        :key="genre.id"
+        :to="'/genres/' + genre.id"
+        @click="changeGenre(genre.id)"
+      >
+        <ButtonDefault
+          class="bg-red-500 border-red-500 text-white hover:text-black"
+          :name="genre.name"
+        />
+      </router-link>
+    </div>
+    <div class="flex flex-wrap">
+      <div
+        class="bg-zinc-900 p-4 flex justify-center items-center mb-8"
+        v-for="song in songs"
+        :key="song.id"
+      >
         <div
-          class="flex border-b py-3 cursor-pointer hover:shadow-md px-2 hover:shadow-gray-400"
-          v-for="song in songs"
-          :key="song.id"
+          class="bg-zinc-950 p-8 rounded-lg shadow-md w-80 hover:scale-105 hover:bg-red-300 duration-300 cursor-pointer"
         >
+          <!-- Album Cover -->
           <img
-            class="w-10 h-10 object-cover rounded-lg"
-            alt="User avatar"
             :src="$store.state.urlStorage + song.image"
+            alt="idk - Highvyn, Taylor Shin"
+            class="w-64 h-64 mx-auto rounded-lg mb-4 shadow-lg shadow-zinc-700 object-cover"
           />
-          <div class="flex flex-col px-2 w-full">
-            <span class="text-sm text-red-500 capitalize font-semibold pt-1">
-              {{ song.name }}
-            </span>
-            <span class="text-xs text-gray-500 uppercase font-medium">
-              -{{ song.singer_name }}
-            </span>
-          </div>
+          <!-- Song Title -->
+          <h2 class="text-xl font-semibold text-center text-white">
+            {{ song.name }}
+          </h2>
+          <!-- Artist Name -->
+          <p class="text-gray-600 text-sm text-center">
+            {{ song.singer_name }}
+          </p>
         </div>
       </div>
     </div>

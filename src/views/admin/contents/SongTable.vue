@@ -7,9 +7,12 @@
         ><ButtonTrans1Vue :name="'Create song'"
       /></router-link>
       <div class="flex justify-center">
+        <button @click.prevent="closeGenre()">
+          <ButtonDefault :name="'all'" />
+        </button>
         <form method="get">
           <button @click.prevent="filerCategory(0)">
-            <ButtonDefault :name="'all'" />
+            <ButtonDefault :name="'show genre'" />
           </button>
         </form>
         <form method="get" v-for="category in genres" :key="category.id">
@@ -53,6 +56,7 @@
               singer
             </th>
             <th
+              v-if="showgenre"
               class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
             >
               genres
@@ -102,6 +106,7 @@
               {{ song.singer_name }}
             </td>
             <td
+              v-if="showgenre"
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
               {{ song.genre_name || category }}
@@ -110,7 +115,7 @@
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
               <router-link
-                :to="'/update/' + song.id"
+                :to="'/update/songs/' + song.id"
                 class="text-blue-400 hover:text-blue-600 underline"
                 >Edit</router-link
               >
@@ -151,10 +156,11 @@ export default {
       token: localStorage.getItem("token"),
       category: "",
       page: 1,
+      showgenre: false,
     };
   },
   created() {
-    const api = this.$store.state.UrlServe + "/songs/all";
+    const api = this.$store.state.UrlServe + "/songs";
     console.log(api);
     axios
       .get(api, {
@@ -197,6 +203,7 @@ export default {
     },
 
     filerCategory(id, name) {
+      this.showgenre = true;
       let param = "?genre=";
       if (id === 0) {
         param = "";
@@ -214,12 +221,20 @@ export default {
         })
         .catch(() => console.log(console.error()));
     },
+    closeGenre() {
+      this.showgenre = false;
+      axios.get(this.$store.state.UrlServe + "/songs/all").then((response) => {
+        this.songs = response.data.data;
+        this.page = response.data.data.last_page;
+      });
+    },
     changePage(page) {
       const apiPage = this.$store.state.UrlServe + "/songs?page=" + page;
       axios
         .get(apiPage)
         .then((response) => {
-          this.songs = response.data.data.data;
+          console.log(response);
+          this.songs = response.data.data;
         })
         .catch(() => console.log(console.error()));
     },

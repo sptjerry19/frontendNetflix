@@ -16,9 +16,12 @@ import GenreTable from "../views/admin/contents/GenreTable.vue";
 import SongTable from "../views/admin/contents/SongTable.vue";
 import SingerTable from "../views/admin/contents/SingerTable.vue";
 import SongIndex from "../views/songs/SongIndex.vue";
+import SongAll from "../views/songs/SongAll.vue";
 import GenreShow from "../views/genres/GenreShow.vue";
+import GenreAll from "../views/genres/GenreAll.vue";
 import GenreIndex from "../views/genres/GenreIndex.vue";
 import CreateSong from "../views/admin/CreateSong.vue";
+import UpdateSong from "../views/admin/UpdateSong.vue";
 import CreateSinger from "../views/admin/CreateSinger.vue";
 
 const router = createRouter({
@@ -80,7 +83,12 @@ const router = createRouter({
     {
       path: "/songs",
       name: "songs",
-      component: SongIndex,
+      component: SongAll,
+    },
+    {
+      path: "/genres",
+      name: "genres",
+      component: GenreAll,
     },
     {
       path: "/genres/:id",
@@ -167,6 +175,16 @@ const router = createRouter({
       path: "/create/song",
       name: "Create Song",
       component: CreateSong,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token") === null) {
+          next({ name: "Netflix Login" });
+        } else next();
+      },
+    },
+    {
+      path: "/update/songs/:id",
+      name: "Update Song",
+      component: UpdateSong,
       beforeEnter: (to, from, next) => {
         if (localStorage.getItem("token") === null) {
           next({ name: "Netflix Login" });

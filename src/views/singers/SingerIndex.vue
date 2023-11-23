@@ -17,6 +17,9 @@
         </div>
       </router-link>
     </div>
+    <p class="text-white text-center mb-8 hover:text-red-500">
+      <router-link to="/genres">show more ></router-link>
+    </p>
   </div>
 </template>
 

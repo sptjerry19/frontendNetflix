@@ -47,8 +47,14 @@
         <div class="w-2/5 ml-10 flex flex-col items-start mt-10 text-white">
           <h1 class="text-2xl">{{ film.title }}</h1>
           <p class="opacity-50 text-sm">{{ film.over_view }}</p>
+          <p class="opacity-50 text-sm text-green-400">
+            views: {{ film.views }}
+          </p>
           <router-link :to="'home/' + film.id">
-            <ButtonTrans1 class="my-6" :name="'Play Now!'" />
+            <ButtonTrans1
+              class="my-6 bg-red-500 hover:bg-red-700"
+              :name="'Play Now!'"
+            />
           </router-link>
         </div>
       </div>

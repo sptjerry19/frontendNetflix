@@ -17,12 +17,12 @@
             >
               <!-- Album Cover -->
               <img
-                :src="$store.state.urlStorage + 'image/' + genre.image"
+                src="https://www.shutterstock.com/image-vector/vector-set-realistic-isolated-neon-260nw-1192029745.jpg"
                 alt="idk - Highvyn, Taylor Shin"
                 class="w-40 h-40 mx-auto rounded-lg shadow-lg shadow-zinc-700 object-cover"
               />
               <h2
-                class="absolute bottom-20 right-0 left-0 text-xl font-semibold text-center text-white"
+                class="absolute bottom-20 right-0 left-0 text-3xl font-semibold text-center text-white"
               >
                 {{ genre.name }}
               </h2>
@@ -31,6 +31,9 @@
           </div>
         </router-link>
       </div>
+      <p class="text-white text-center mb-8 hover:text-red-500">
+        <router-link to="/genres">show more ></router-link>
+      </p>
     </div>
     <SingerIndex />
     <FooterComponent />
