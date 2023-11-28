@@ -16,6 +16,7 @@ import GenreTable from "../views/admin/contents/GenreTable.vue";
 import SongTable from "../views/admin/contents/SongTable.vue";
 import SingerTable from "../views/admin/contents/SingerTable.vue";
 import SongIndex from "../views/songs/SongIndex.vue";
+import SongShow from "../views/songs/SongShow.vue";
 import SongAll from "../views/songs/SongAll.vue";
 import GenreShow from "../views/genres/GenreShow.vue";
 import GenreAll from "../views/genres/GenreAll.vue";
@@ -84,6 +85,11 @@ const router = createRouter({
       path: "/songs",
       name: "songs",
       component: SongAll,
+    },
+    {
+      path: "/songs/:id",
+      name: "song",
+      component: SongShow,
     },
     {
       path: "/genres",

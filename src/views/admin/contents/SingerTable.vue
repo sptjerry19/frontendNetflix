@@ -3,10 +3,11 @@
   <SearchBar :name="$route.name" />
   <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
     <div class="px-6 pt-6 2xl:container">
-      <ButtonTrans1Vue @click="isOpenModal = true" :name="'Create Category'" />
-      <ModalForm
+      <ButtonTrans1Vue @click="isOpenModal = true" :name="'Create singer'" />
+      <ModalFile
         v-click-outside="onClickOutside"
         v-if="isOpenModal"
+        :table="'singers'"
         @closeModal="isOpenModal = false"
       />
       <table class="mt-2 border-collapse w-11/12 max-w-full">
@@ -37,35 +38,35 @@
         <tbody>
           <tr
             class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
-            v-for="category in categories"
-            :key="category.id"
+            v-for="singer in singers"
+            :key="singer.id"
           >
             <td
               class="w-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              {{ category.id }}
+              {{ singer.id }}
             </td>
             <td
               class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              {{ category.name }}
+              {{ singer.name }}
             </td>
             <td
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
-              {{ moment(category.created_at).format("DD-MM-YYYY") }}
+              {{ moment(singer.created_at).format("DD-MM-YYYY") }}
             </td>
             <td
               class="w-1/6 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
               <router-link
-                :to="'/update/category' + category.id"
+                :to="'/update/singers/' + singer.id"
                 class="text-blue-400 hover:text-blue-600 underline"
                 >Edit</router-link
               >
               <button
                 class="text-red-400 hover:text-red-600 underline pl-6"
-                @click="removeCategory(category.id)"
+                @click="removeSinger(singer.id)"
               >
                 Remove
               </button>
@@ -80,7 +81,8 @@
 <script setup>
 import Home from "../Home.vue";
 import SearchBar from "./SearchBar.vue";
-import ModalForm from "../../../components/modals/modalForm.vue";
+// import ModalForm from "../../../components/modals/modalForm.vue";
+import ModalFile from "../../../components/modals/ModalFile.vue";
 import axios from "axios";
 import ButtonTrans1Vue from "../../../components/buttons/ButtonTrans1.vue";
 </script>
@@ -94,7 +96,7 @@ export default {
   },
   data() {
     return {
-      categories: [],
+      singers: [],
       moment: moment,
       isOpenModal: false,
       token: localStorage.getItem("token"),
@@ -105,7 +107,7 @@ export default {
     axios
       .get(api)
       .then((response) => {
-        this.categories = response.data.data;
+        this.singers = response.data.data;
         console.log(response);
       })
       .catch((error) => console.log(error));
@@ -114,8 +116,8 @@ export default {
     onClickOutside(event) {
       console.log("Clicked outside. Event: ", event);
     },
-    removeCategory(id) {
-      const api = this.$store.state.UrlServe + "/categories/" + id;
+    removeSinger(id) {
+      const api = this.$store.state.UrlServe + "/singers/" + id;
       axios
         .delete(api, {
           headers: {

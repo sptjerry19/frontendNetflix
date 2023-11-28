@@ -6,6 +6,13 @@
     :class="[!isTop && 'backdrop-blur-md']"
     @mouseleave="isOpenSetting = false"
   >
+    <div v-if="isOpenNavleft">
+      <nav>
+        <a href="#">Trang chủ</a>
+        <a href="#">Giới thiệu</a>
+        <a href="#">Liên hệ</a>
+      </nav>
+    </div>
     <!-- <div class="header__overlay absolute inset-0 w-full h-full"></div> -->
     <nav class="px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
       <router-link to="/">
@@ -206,6 +213,10 @@ export default {
       isOpenSetting: false,
       tokenStorage: localStorage.getItem("token"),
       isTop: true,
+      isOpenNavleft: false,
+      isDragging: false,
+      startX: 0,
+      endX: 0,
     };
   },
   methods: {
@@ -232,9 +243,39 @@ export default {
     handleScroll() {
       this.isTop = window.scrollY === 0;
     },
+    openNavLeft() {
+      this.isOpenNavleft = true;
+    },
+    navFadeIn() {
+      this.$refs.nav.style.opacity = 0;
+      this.$refs.nav.style.transition = "opacity 200ms ease-in-out";
+      this.$refs.nav.style.opacity = 1;
+    },
+
+    navFadeOut() {
+      this.$refs.nav.style.opacity = 1;
+      this.$refs.nav.style.transition = "opacity 200ms ease-in-out";
+      this.$refs.nav.style.opacity = 0;
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
+    document.addEventListener("mousedown", function (event) {
+      this.isDragging = true;
+      console.log(event.clientX);
+      this.startX = event.clientX;
+      // console.log(event.clientY);
+    });
+    document.addEventListener("mouseup", function (event) {
+      this.isDragging = false;
+      console.log(event.clientX);
+      this.endX = event.clientX;
+      // console.log(event.clientY);
+      if (this.endX - this.startX >= 150) {
+        this.isOpenNavleft = true;
+        console.log(this.isOpenNavleft);
+      }
+    });
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);

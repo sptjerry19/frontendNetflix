@@ -10,7 +10,7 @@
         <div
           class="overflow-hidden m-4 relative justify-end cursor-pointer capitalize flex flex-col rounded-md bg-red-500 w-52 h-64 z-50 object-cover text-white transform hover:-translate-y-2 transition ease-in-out duration-500"
         >
-          <img :src="singer.image" alt="desktop" />
+          <img :src="$store.state.urlStorage + singer.image" alt="desktop" />
           <div class="absolute p-3 flex flex-col">
             <span>{{ singer.name }}</span>
           </div>
@@ -35,7 +35,7 @@ export default {
     axios
       .get(this.$store.state.UrlServe + "/singers")
       .then((response) => {
-        console.log(response);
+        console.log("singers: ", response);
         this.singers = response.data.data;
       })
       .catch((error) => {

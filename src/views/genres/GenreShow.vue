@@ -26,24 +26,28 @@
           />
         </div>
 
-        <div
-          class="flex border-b py-3 cursor-pointer hover:shadow-md px-2 hover:shadow-gray-400"
-          v-for="song in songs"
-          :key="song.id"
-        >
-          <img
-            class="w-10 h-10 object-cover rounded-lg"
-            alt="User avatar"
-            :src="$store.state.urlStorage + song.image"
-          />
-          <div class="flex flex-col px-2 w-full">
-            <span class="text-sm text-red-500 capitalize font-semibold pt-1">
-              {{ song.name }}
-            </span>
-            <span class="text-xs text-gray-500 uppercase font-medium">
-              -{{ song.singer_name }}
-            </span>
-          </div>
+        <div class="" v-for="song in songs" :key="song.id">
+          <router-link :to="'/songs/' + song.id">
+            <div
+              class="flex border-b py-3 cursor-pointer hover:shadow-md px-2 hover:shadow-gray-400"
+            >
+              <img
+                class="w-10 h-10 object-cover rounded-lg"
+                alt="User avatar"
+                :src="$store.state.urlStorage + song.image"
+              />
+              <div class="flex flex-col px-2 w-full">
+                <span
+                  class="text-sm text-red-500 capitalize font-semibold pt-1"
+                >
+                  {{ song.name }}
+                </span>
+                <span class="text-xs text-gray-500 uppercase font-medium">
+                  -{{ song.singer_name }}
+                </span>
+              </div>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@ export default {
     },
     maxHeight: {
       "3/4": "80vh",
+      "1/2": "50vh",
     },
     extend: {
       backgroundImage: {
