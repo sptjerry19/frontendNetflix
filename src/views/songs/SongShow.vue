@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col min-h-full items-center justify-center bg-zinc-900">
-    <NavbarView @click="audio.pause(), (isPlay = true)" />
+    <NavbarView />
     <div class="mt-20 w-full sm:w-2/3">
       <div
         class="bg-white border-slate-100 dark:bg-slate-800 dark:border-slate-500 border-b rounded-t-xl p-4 pb-6 sm:p-10 sm:pb-8 lg:p-6 xl:p-10 xl:pb-8 space-y-6 sm:space-y-8 lg:space-y-6 xl:space-y-8 items-center"
@@ -358,6 +358,7 @@ export default {
           this.audio.pause();
           this.isPlay = true;
           this.song = response.data[0];
+          this.id = this.song.id;
           this.audio = new Audio(
             this.$store.state.urlStorage + response.data[0].audio
           );
@@ -386,6 +387,10 @@ export default {
     setVolume() {
       return (this.audio.volume = this.volume);
     },
+  },
+  unmounted() {
+    this.audio.pause();
+    delete this.audio;
   },
 };
 </script>

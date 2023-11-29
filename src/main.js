@@ -10,6 +10,7 @@ import VuePlyr from "vue-plyr";
 import "vue-plyr/dist/vue-plyr.css";
 import VueLazyload from "vue-lazyload";
 import vClickOutside from "click-outside-vue3";
+import { AVPlugin } from "vue-audio-visual";
 
 const app = createApp(App);
 
@@ -31,5 +32,6 @@ app.use(VueLazyload, {
 });
 
 app.use(vClickOutside);
+app.use(AVPlugin);
 
 app.mount("#app");

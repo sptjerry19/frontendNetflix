@@ -66,9 +66,7 @@ export default {
         console.log(error);
       });
     axios
-      .get(this.$store.state.UrlServe + "/songs/top10", {
-        params: { linit: this.$route.query.linit },
-      })
+      .get(this.$store.state.UrlServe + "/songs/top10")
       .then((response) => {
         console.log(response.data);
         this.songs = response.data;

@@ -24,6 +24,8 @@ import GenreIndex from "../views/genres/GenreIndex.vue";
 import CreateSong from "../views/admin/CreateSong.vue";
 import UpdateSong from "../views/admin/UpdateSong.vue";
 import CreateSinger from "../views/admin/CreateSinger.vue";
+import SingerIndex from "../views/singers/SingerIndex.vue";
+import SingerShow from "../views/singers/SingerShow.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -100,6 +102,16 @@ const router = createRouter({
       path: "/genres/:id",
       name: "genre",
       component: GenreShow,
+    },
+    {
+      path: "/singers",
+      name: "singers",
+      component: SingerIndex,
+    },
+    {
+      path: "/singers/:id",
+      name: "singer",
+      component: SingerShow,
     },
 
     // Admin

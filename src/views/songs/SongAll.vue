@@ -12,24 +12,26 @@
         v-for="song in songs"
         :key="song.id"
       >
-        <div
-          class="bg-zinc-950 p-8 rounded-lg shadow-md w-80 hover:scale-105 hover:bg-red-300 duration-300 cursor-pointer"
-        >
-          <!-- Album Cover -->
-          <img
-            :src="$store.state.urlStorage + song.image"
-            alt="idk - Highvyn, Taylor Shin"
-            class="w-64 h-64 mx-auto rounded-lg mb-4 shadow-lg shadow-zinc-700 object-cover"
-          />
-          <!-- Song Title -->
-          <h2 class="text-xl font-semibold text-center text-white">
-            {{ song.name }}
-          </h2>
-          <!-- Artist Name -->
-          <p class="text-gray-600 text-sm text-center">
-            {{ song.singer_name }}
-          </p>
-        </div>
+        <router-link :to="'/songs/' + song.id">
+          <div
+            class="bg-zinc-950 p-8 rounded-lg shadow-md w-80 hover:scale-105 hover:bg-red-300 duration-300 cursor-pointer"
+          >
+            <!-- Album Cover -->
+            <img
+              :src="$store.state.urlStorage + song.image"
+              alt="idk - Highvyn, Taylor Shin"
+              class="w-64 h-64 mx-auto rounded-lg mb-4 shadow-lg shadow-zinc-700 object-cover"
+            />
+            <!-- Song Title -->
+            <h2 class="text-xl font-semibold text-center text-white">
+              {{ song.name }}
+            </h2>
+            <!-- Artist Name -->
+            <p class="text-gray-600 text-sm text-center">
+              {{ song.singer_name }}
+            </p>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -61,8 +63,8 @@ export default {
         console.log(error);
       });
     axios
-      .get(this.$store.state.UrlServe + "/songs/all", {
-        params: { linit: this.$route.query.linit },
+      .get(this.$store.state.UrlServe + "/songs", {
+        params: { a: this.$route.query.a },
       })
       .then((response) => {
         console.log(response.data);

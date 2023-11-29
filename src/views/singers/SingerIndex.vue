@@ -10,8 +10,12 @@
         <div
           class="overflow-hidden m-4 relative justify-end cursor-pointer capitalize flex flex-col rounded-md bg-red-500 w-52 h-64 z-50 object-cover text-white transform hover:-translate-y-2 transition ease-in-out duration-500"
         >
-          <img :src="$store.state.urlStorage + singer.image" alt="desktop" />
-          <div class="absolute p-3 flex flex-col">
+          <img
+            class="h-full object-cover"
+            :src="$store.state.urlStorage + singer.image"
+            alt="desktop"
+          />
+          <div class="absolute p-3 flex flex-col drop-shadow-2xl text-zinc-300">
             <span>{{ singer.name }}</span>
           </div>
         </div>

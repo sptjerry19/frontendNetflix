@@ -260,22 +260,22 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
-    document.addEventListener("mousedown", function (event) {
-      this.isDragging = true;
-      console.log(event.clientX);
-      this.startX = event.clientX;
-      // console.log(event.clientY);
-    });
-    document.addEventListener("mouseup", function (event) {
-      this.isDragging = false;
-      console.log(event.clientX);
-      this.endX = event.clientX;
-      // console.log(event.clientY);
-      if (this.endX - this.startX >= 150) {
-        this.isOpenNavleft = true;
-        console.log(this.isOpenNavleft);
-      }
-    });
+    // document.addEventListener("mousedown", function (event) {
+    //   this.isDragging = true;
+    //   console.log(event.clientX);
+    //   this.startX = event.clientX;
+    //   // console.log(event.clientY);
+    // });
+    // document.addEventListener("mouseup", function (event) {
+    //   this.isDragging = false;
+    //   console.log(event.clientX);
+    //   this.endX = event.clientX;
+    //   // console.log(event.clientY);
+    //   if (this.endX - this.startX >= 150) {
+    //     this.isOpenNavleft = true;
+    //     console.log(this.isOpenNavleft);
+    //   }
+    // });
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
