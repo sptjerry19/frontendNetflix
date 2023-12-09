@@ -26,6 +26,7 @@ import UpdateSong from "../views/admin/UpdateSong.vue";
 import CreateSinger from "../views/admin/CreateSinger.vue";
 import SingerIndex from "../views/singers/SingerIndex.vue";
 import SingerShow from "../views/singers/SingerShow.vue";
+import Favorite from "../views/users/Favorites.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -213,6 +214,18 @@ const router = createRouter({
       path: "/create/singer",
       name: "Create Singer",
       component: CreateSinger,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token") === null) {
+          next({ name: "Netflix Login" });
+        } else next();
+      },
+    },
+
+    // favorites
+    {
+      path: "/favorites",
+      name: "Favorites",
+      component: Favorite,
       beforeEnter: (to, from, next) => {
         if (localStorage.getItem("token") === null) {
           next({ name: "Netflix Login" });
