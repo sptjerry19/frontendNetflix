@@ -4,11 +4,12 @@ Link Backend: https://github.com/sptjerry19/backendNetflix
 
 ## Live Demo
 Link: https://master--demonetflixjerry.netlify.app/
-![example](https://github.com/sptjerry19/frontendNetflix/assets/95573836/d2dfe1c6-8724-45ac-bfa7-9a3c80fb3a4f)
-![example](https://github.com/sptjerry19/frontendNetflix/assets/95573836/145cbcbe-3a23-4c3d-ab5c-ee8549a99c17)
-![example](https://github.com/sptjerry19/frontendNetflix/assets/95573836/3167ae65-cd9d-4b79-8e4e-96e2ec312e7e)
-![example](https://github.com/sptjerry19/frontendNetflix/assets/95573836/f400f06c-648b-4dc1-a79d-87b68af98b29)
-file:///home/cheese/Pictures/Screenshots/Screenshot%20from%202023-12-13%2020-47-03.png
+![Screenshot 2023-12-13 224343](https://github.com/sptjerry19/frontendNetflix/assets/95573836/6d15d33c-ce2a-49ad-9da6-67a7df2ed88d)
+![Screenshot 2023-12-13 224857](https://github.com/sptjerry19/frontendNetflix/assets/95573836/76ca165a-c9e4-49df-9d9b-272672d3d655)
+![Screenshot 2023-12-13 223219](https://github.com/sptjerry19/frontendNetflix/assets/95573836/b23e3029-64cb-4fec-aa00-c39a2992341c)
+![Screenshot 2023-12-13 223928](https://github.com/sptjerry19/frontendNetflix/assets/95573836/4ce21276-1974-47bb-9490-79f14d9d45ba)
+![Screenshot 2023-12-13 224036](https://github.com/sptjerry19/frontendNetflix/assets/95573836/e604255b-9561-47ab-bc53-3490d4bb23ac)
+
 
 ## Tech stack
 * [Vue](https://github.com/vuejs/vue)
@@ -22,6 +23,8 @@ file:///home/cheese/Pictures/Screenshots/Screenshot%20from%202023-12-13%2020-47-
   - [x] Sign up
   - [x] Sign in
   - [x] Logout
+  - [x] Admin Page
+  - [x] CRUD (films, songs, categories, genres) + Relation ship
 - [x] Movies
   - [x] Search movies
   - [x] watch movies
