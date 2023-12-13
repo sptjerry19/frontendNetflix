@@ -30,9 +30,7 @@
     <!-- overflow-x-auto whitespace-nowrap scroll-smooth custom-scrollbar focus:scroll-auto bg-zinc-900 -->
     <div class="flex justify-center items-center flex-wrap bg-zinc-900">
       <div class="mx-6 my-6" v-for="item in films" :key="item.id">
-        <router-link :to="'/home/' + item.id">
-          <netflix-item :card="item" />
-        </router-link>
+        <netflix-item :card="item" />
       </div>
     </div>
     <!-- no result -->
@@ -50,7 +48,6 @@
 <script setup>
 import NavbarView from "./NavbarView.vue";
 import NetflixItem from "../components/NetflixItem.vue";
-import OverView from "../components/OverView.vue";
 import ButtonDefault from "../components/buttons/ButtonDefault.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import Paginate from "../components/Paginate.vue";

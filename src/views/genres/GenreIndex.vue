@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-screen bg-zinc-900">
+  <div class="flex flex-col w-full bg-zinc-900">
     <NavbarView />
     <SongIndex />
     <div class="flex flex-col pt-20 justify-center bg-zinc-950 py-4">

@@ -160,7 +160,7 @@ export default {
     };
   },
   created() {
-    const api = this.$store.state.UrlServe + "/songs";
+    const api = this.$store.state.UrlServe + "/songs/all";
     console.log(api);
     axios
       .get(api, {
@@ -214,8 +214,8 @@ export default {
       axios
         .get(api)
         .then((response) => {
-          console.log(response);
-          this.songs = response.data.data;
+          console.log(response.data);
+          this.songs = response.data;
           this.page = response.data.data.last_page;
           this.category = name;
         })

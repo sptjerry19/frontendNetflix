@@ -25,6 +25,8 @@
       <button class="absolute top-10 right-10 text-3xl" @click="$router.back()">
         X
       </button>
+      <p v-if="errors !== ''" class="text-red-600">{{ errors }}</p>
+      <p v-if="isSuccsess" class="text-green-600">Create Success</p>
       <form @submit.prevent="handleSubmit" class="mt-6">
         <div class="flex justify-between gap-3">
           <span class="w-full">
@@ -133,6 +135,8 @@ export default {
       selectedGenres: [],
       imagePreview: null,
       isSuccessModal: false,
+      errors: "",
+      isSuccsess: false,
     };
   },
 
@@ -183,10 +187,14 @@ export default {
           this.audio = null;
           this.singer_id = 1;
           this.selectedGenres = [];
+          this.errors = "";
+          this.isSuccsess = true;
           setTimeout((this.isSuccessModal = false), 3000);
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response.data.message);
+          this.errors = error.response.data.message;
+          this.isSuccsess = false;
         });
     },
   },

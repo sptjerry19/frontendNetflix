@@ -6,32 +6,13 @@
     >
       Music player
     </div>
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap content content-start justify-center">
       <div
-        class="bg-zinc-900 p-4 flex justify-center items-center mb-8"
+        class="relative bg-zinc-900 p-4 flex justify-center items-center mb-8"
         v-for="song in songs"
         :key="song.id"
       >
-        <router-link :to="'/songs/' + song.id">
-          <div
-            class="bg-zinc-950 p-8 rounded-lg shadow-md w-80 hover:scale-105 hover:bg-red-300 duration-300 cursor-pointer"
-          >
-            <!-- Album Cover -->
-            <img
-              :src="$store.state.urlStorage + song.image"
-              alt="idk - Highvyn, Taylor Shin"
-              class="w-64 h-64 mx-auto rounded-lg mb-4 shadow-lg shadow-zinc-700 object-cover"
-            />
-            <!-- Song Title -->
-            <h2 class="text-xl font-semibold text-center text-white">
-              {{ song.name }}
-            </h2>
-            <!-- Artist Name -->
-            <p class="text-gray-600 text-sm text-center">
-              {{ song.singer_name }}
-            </p>
-          </div>
-        </router-link>
+        <SongComponent :song="song" />
       </div>
     </div>
   </div>
@@ -40,6 +21,7 @@
 <script setup>
 import NavbarView from "../NavbarView.vue";
 import ButtonDefault from "../../components/buttons/ButtonDefault.vue";
+import SongComponent from "../../components/SongComponent.vue";
 </script>
 
 <script>
@@ -49,10 +31,13 @@ export default {
     return {
       songs: [],
       genres: [],
-      page: 1,
+      current_page: 1,
+      total_page: 1,
+      isFavorite: false,
     };
   },
   created() {
+    window.addEventListener("scroll", this.handleScroll);
     axios
       .get(this.$store.state.UrlServe + "/genres/")
       .then((response) => {
@@ -63,11 +48,12 @@ export default {
         console.log(error);
       });
     axios
-      .get(this.$store.state.UrlServe + "/songs", {
+      .get(this.$store.state.UrlServe + "/songs/all", {
         params: { a: this.$route.query.a },
       })
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
+        this.total_page = response.data.last_page;
         this.songs = response.data.data;
       })
       .catch((error) => console.log(error));
@@ -88,6 +74,32 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+    nextPageSong(current_page) {
+      axios
+        .get(this.$store.state.UrlServe + "/songs/all", {
+          params: { a: this.$route.query.a, page: current_page },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.songs = this.songs.concat(response.data.data);
+        })
+        .catch((error) => console.log(error));
+    },
+    handleScroll(event) {
+      console.log(window.scrollY);
+      console.log(this.total_page);
+      if (window.scrollY >= 400) {
+        this.current_page++;
+        if (this.current_page > this.total_page) {
+          window.removeEventListener("scroll", this.handleScroll);
+        } else {
+          this.nextPageSong(this.current_page);
+        }
+      }
+    },
+  },
+  unmounted() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>

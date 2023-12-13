@@ -316,7 +316,7 @@ export default {
       .get(this.$store.state.UrlServe + "/songs/")
       .then((response) => {
         // console.log(response);
-        this.songs = response.data.data;
+        this.songs = response.data;
         this.songs.forEach((song, index) => {
           if (song.id === this.id) {
             this.currenSong = index;

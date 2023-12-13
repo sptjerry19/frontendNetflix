@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-screen h-screen bg-zinc-900">
+  <div class="flex flex-col w-full h-screen bg-zinc-900">
     <NavbarView />
     <div class="mt-20">
       <div class="flex justify-center bg-zinc-900 pt-8">
@@ -15,7 +15,9 @@
           />
         </router-link>
       </div>
-      <div class="flex flex-col p-5">
+      <div
+        class="flex flex-col p-5 w-11/12 h-3/5 overflow-y-scroll ml-auto mr-auto"
+      >
         <div class="border-b pb-1 flex justify-between items-center mb-2">
           <span class="text-base font-semibold uppercase text-gray-700">
             play list</span
