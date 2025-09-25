@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debug Notifications</title>
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <h1>🔧 Debug Push Notifications</h1>
+    <div style="padding: 20px; font-family: Arial, sans-serif">
+      <button
+        onclick="runDebugTests()"
+        style="
+          padding: 10px 20px;
+          background: #3b82f6;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        "
+      >
+        🧪 Chạy Debug Tests
+      </button>
+
+      <div
+        id="results"
+        style="
+          margin-top: 20px;
+          padding: 15px;
+          background: #f8f9fa;
+          border-radius: 5px;
+          white-space: pre-wrap;
+          font-family: monospace;
+        "
+      ></div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+      import {
+        getMessaging,
+        getToken,
+      } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-messaging.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCvhBj3HKY6kTTzKvd4ctizmShph_gQrcg",
+        authDomain: "yumic-83e7d.firebaseapp.com",
+        projectId: "yumic-83e7d",
+        storageBucket: "yumic-83e7d.firebasestorage.app",
+        messagingSenderId: "939100829101",
+        appId: "1:939100829101:web:1f2cd113d5bb771de69d24",
+        measurementId: "G-MWQ68ZTMTN",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const messaging = getMessaging(app);
+
+      window.runDebugTests = async function () {
+        const results = document.getElementById("results");
+        let output = "🔧 DEBUG NOTIFICATIONS TEST\n\n";
+
+        try {
+          // Test 1: Browser Support
+          output += "1️⃣ Kiểm tra Browser Support:\n";
+          const hasServiceWorker = "serviceWorker" in navigator;
+          const hasNotification = "Notification" in window;
+          output += `   - ServiceWorker: ${hasServiceWorker ? "✅" : "❌"}\n`;
+          output += `   - Notification API: ${hasNotification ? "✅" : "❌"}\n`;
+          output += `   - Current permission: ${Notification.permission}\n\n`;
+
+          if (!hasServiceWorker || !hasNotification) {
+            output += "❌ Browser không hỗ trợ Push Notifications\n";
+            results.textContent = output;
+            return;
+          }
+
+          // Test 2: Service Worker Registration
+          output += "2️⃣ Đăng ký Service Worker:\n";
+          try {
+            const registration = await navigator.serviceWorker.register(
+              "/firebase-messaging-sw.js"
+            );
+            output += `   ✅ Service Worker đăng ký thành công\n`;
+            output += `   📍 Scope: ${registration.scope}\n`;
+            output += `   📝 State: ${
+              registration.active?.state || "installing"
+            }\n\n`;
+          } catch (swError) {
+            output += `   ❌ Service Worker failed: ${swError.message}\n\n`;
+            results.textContent = output;
+            return;
+          }
+
+          // Test 3: Request Permission
+          output += "3️⃣ Yêu cầu quyền thông báo:\n";
+          try {
+            const permission = await Notification.requestPermission();
+            output += `   📋 Permission result: ${permission}\n\n`;
+
+            if (permission !== "granted") {
+              output += "❌ Permission bị từ chối hoặc dismissed\n";
+              results.textContent = output;
+              return;
+            }
+          } catch (permError) {
+            output += `   ❌ Permission request failed: ${permError.message}\n\n`;
+            results.textContent = output;
+            return;
+          }
+
+          // Test 4: Get FCM Token
+          output += "4️⃣ Lấy FCM Token:\n";
+          try {
+            const vapidKey =
+              "BJnxxyu-A79LKcjnuJ9k6VWhFS_bLnTV7DtDursl0OZzs7e3dTwgyWmGjb1dPuc-AgTb3Clp8eCoVJG4UX6vLq4";
+            output += `   🔑 VAPID Key: ${vapidKey.substring(0, 20)}...\n`;
+
+            const token = await getToken(messaging, { vapidKey });
+
+            if (token) {
+              output += `   🎉 FCM Token generated successfully!\n`;
+              output += `   📋 Token (first 50 chars): ${token.substring(
+                0,
+                50
+              )}...\n`;
+              output += `   📏 Token length: ${token.length} characters\n\n`;
+              output += "✅ PUSH NOTIFICATIONS SETUP THÀNH CÔNG!\n";
+            } else {
+              output += "   ❌ Không thể generate FCM token\n";
+            }
+          } catch (tokenError) {
+            output += `   ❌ FCM Token failed: ${tokenError.message}\n`;
+            output += `   🔍 Error code: ${tokenError.code}\n`;
+            output += `   📚 Error stack: ${tokenError.stack}\n`;
+          }
+        } catch (globalError) {
+          output += `💥 Global error: ${globalError.message}\n`;
+          output += `📚 Stack: ${globalError.stack}\n`;
+        }
+
+        results.textContent = output;
+      };
+    </script>
+  </body>
+</html>

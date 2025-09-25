@@ -1,248 +1,109 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import NetflixView from "../views/NetflixView.vue";
-import AddFilm from "../views/admin/AddFilm.vue";
-import UpdateFilm from "../views/admin/UpdateFilm.vue";
-import FilmComponent from "../components/FilmComponent.vue";
-import CategoryView from "../views/CategoryView.vue";
-import LogIn from "../views/users/LogIn.vue";
-import RegisTer from "../views/users/RegisTer.vue";
-import DashBoard from "../views/admin/contents/DashBoard.vue";
-import FilmTable from "../views/admin/contents/FilmTable.vue";
-import Categories from "../views/admin/contents/Categories.vue";
-import ImdbView from "../views/ImdbView.vue";
-import WeatherView from "../views/WeatherView.vue";
-import GenreTable from "../views/admin/contents/GenreTable.vue";
-import SongTable from "../views/admin/contents/SongTable.vue";
-import SingerTable from "../views/admin/contents/SingerTable.vue";
-import SongIndex from "../views/songs/SongIndex.vue";
-import SongShow from "../views/songs/SongShow.vue";
-import SongAll from "../views/songs/SongAll.vue";
-import GenreShow from "../views/genres/GenreShow.vue";
-import GenreAll from "../views/genres/GenreAll.vue";
-import GenreIndex from "../views/genres/GenreIndex.vue";
-import CreateSong from "../views/admin/CreateSong.vue";
-import UpdateSong from "../views/admin/UpdateSong.vue";
-import CreateSinger from "../views/admin/CreateSinger.vue";
-import SingerIndex from "../views/singers/SingerIndex.vue";
-import SingerShow from "../views/singers/SingerShow.vue";
-import Favorite from "../views/users/Favorites.vue";
+import VenueList from "../views/venues/VenueList.vue";
+import VenueDetail from "../views/venues/VenueDetail.vue";
+import Login from "../views/auth/Login.vue";
+import authMiddleware from "../middleware/auth";
+import ownerMiddleware from "../middleware/owner";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // Guest
+    // Public routes
     {
       path: "/",
-      name: "home",
+      name: "Home",
       component: HomeView,
     },
     {
-      path: "/home",
-      name: "Netflix",
-      component: NetflixView,
+      path: "/venues",
+      name: "VenueList",
+      component: VenueList,
     },
     {
-      path: "/home/:id",
-      name: "Netflix Film",
-      component: FilmComponent,
-    },
-    {
-      path: "/categories",
-      name: "Netflix Categories",
-      component: CategoryView,
-    },
-    {
-      path: "/login",
-      name: "Netflix Login",
-      component: LogIn,
-    },
-    {
-      path: "/register",
-      name: "Netflix Register",
-      component: RegisTer,
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/AboutView.vue"),
-    },
-    {
-      path: "/IMDB",
-      name: "IMDB",
-      component: ImdbView,
-    },
-    {
-      path: "/weather",
-      name: "weather",
-      component: WeatherView,
+      path: "/venues/:id",
+      name: "VenueDetail",
+      component: VenueDetail,
     },
 
-    //song
+    // Auth routes
     {
-      path: "/music",
-      name: "music",
-      component: GenreIndex,
+      path: "/auth/login",
+      name: "Login",
+      component: Login,
+      meta: { guest: true },
     },
     {
-      path: "/songs",
-      name: "songs",
-      component: SongAll,
-    },
-    {
-      path: "/songs/:id",
-      name: "song",
-      component: SongShow,
-    },
-    {
-      path: "/genres",
-      name: "genres",
-      component: GenreAll,
-    },
-    {
-      path: "/genres/:id",
-      name: "genre",
-      component: GenreShow,
-    },
-    {
-      path: "/singers",
-      name: "singers",
-      component: SingerIndex,
-    },
-    {
-      path: "/singers/:id",
-      name: "singer",
-      component: SingerShow,
+      path: "/auth/register",
+      name: "Register",
+      component: () => import("../views/auth/Register.vue"),
+      meta: { guest: true },
     },
 
-    // Admin
-
-    //films
+    // Protected routes (require authentication)
     {
-      path: "/create",
-      name: "Netflix Create",
-      component: AddFilm,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
+      path: "/booking/:courtId",
+      name: "CourtBooking",
+      component: () => import("../views/booking/CourtBooking.vue"),
+      beforeEnter: authMiddleware,
     },
     {
-      path: "/update/:id",
-      name: "Netflix Update",
-      component: UpdateFilm,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
+      path: "/bookings",
+      name: "MyBookings",
+      component: () => import("../views/booking/MyBookings.vue"),
+      beforeEnter: authMiddleware,
     },
     {
-      path: "/settings",
-      name: "Netflix settings",
-      component: FilmTable,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
+      path: "/bookings/:id",
+      name: "BookingDetail",
+      component: () => import("../views/booking/BookingDetail.vue"),
+      beforeEnter: authMiddleware,
     },
     {
-      path: "/settings/categories",
-      name: "Netflix setting Categories",
-      component: Categories,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
-    },
-    {
-      path: "/settings/singers",
-      name: "Netflix setting singers",
-      component: SingerTable,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
-    },
-    {
-      path: "/settings/genres",
-      name: "Netflix setting genres",
-      component: GenreTable,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
-    },
-    {
-      path: "/settings/musics",
-      name: "Netflix setting musics",
-      component: SongTable,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
+      path: "/profile",
+      name: "Profile",
+      component: () => import("../views/auth/Profile.vue"),
+      beforeEnter: authMiddleware,
     },
 
-    // songs
+    // Owner dashboard routes (require owner role)
     {
-      path: "/create/song",
-      name: "Create Song",
-      component: CreateSong,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
+      path: "/dashboard",
+      name: "OwnerDashboard",
+      component: () => import("../views/dashboard/OwnerDashboard.vue"),
+      beforeEnter: ownerMiddleware,
     },
     {
-      path: "/update/songs/:id",
-      name: "Update Song",
-      component: UpdateSong,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
+      path: "/dashboard/venues",
+      name: "ManageVenues",
+      component: () => import("../views/dashboard/ManageVenues.vue"),
+      beforeEnter: ownerMiddleware,
     },
     {
-      path: "/create/singer",
-      name: "Create Singer",
-      component: CreateSinger,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
+      path: "/dashboard/venues/create",
+      name: "CreateVenue",
+      component: () => import("../views/dashboard/CreateVenue.vue"),
+      beforeEnter: ownerMiddleware,
     },
-
-    // favorites
     {
-      path: "/favorites",
-      name: "Favorites",
-      component: Favorite,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("token") === null) {
-          next({ name: "Netflix Login" });
-        } else next();
-      },
+      path: "/dashboard/venues/:id/edit",
+      name: "EditVenue",
+      component: () => import("../views/dashboard/EditVenue.vue"),
+      beforeEnter: ownerMiddleware,
+    },
+    {
+      path: "/dashboard/bookings",
+      name: "ManageBookings",
+      component: () => import("../views/dashboard/ManageBookings.vue"),
+      beforeEnter: ownerMiddleware,
     },
 
-    // {
-    //   path: "/settings/films",
-    //   name: "Netflix settingFilms",
-    //   component: FilmTable,
-    //   beforeEnter: (to, from, next) => {
-    //     if (localStorage.getItem("token") === null) {
-    //       next({ name: "Netflix Login" });
-    //     } else next();
-    //   },
-    // },
+    // Catch-all 404 route
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () => import("../views/NotFound.vue"),
+    },
   ],
 });
 

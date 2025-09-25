@@ -1,98 +1,237 @@
-# Frontend Netflix Clone
-A simple [Netflix](https://netflix.com) clone based on Vue powered by [Laravel](https://laravel.com/).
-Link Backend: https://github.com/sptjerry19/backendNetflix
+# Booking Sport Frontend
 
-## Live Demo
-Link: https://master--demonetflixjerry.netlify.app/
-![Screenshot 2023-12-13 224343](https://github.com/sptjerry19/frontendNetflix/assets/95573836/6d15d33c-ce2a-49ad-9da6-67a7df2ed88d)
-![Screenshot 2023-12-13 224857](https://github.com/sptjerry19/frontendNetflix/assets/95573836/76ca165a-c9e4-49df-9d9b-272672d3d655)
-![Screenshot 2023-12-13 223219](https://github.com/sptjerry19/frontendNetflix/assets/95573836/b23e3029-64cb-4fec-aa00-c39a2992341c)
-![Screenshot 2023-12-13 223928](https://github.com/sptjerry19/frontendNetflix/assets/95573836/4ce21276-1974-47bb-9490-79f14d9d45ba)
-![Screenshot 2023-12-13 224036](https://github.com/sptjerry19/frontendNetflix/assets/95573836/e604255b-9561-47ab-bc53-3490d4bb23ac)
+Ứng dụng frontend cho hệ thống đặt sân thể thao được xây dựng bằng Vue.js 3 và Tailwind CSS.
 
+## ✨ Tính năng
 
-## Tech stack
-* [Vue](https://github.com/vuejs/vue)
-* [Vuex](https://github.com/vuejs/vuex)
-* [Vue Router](https://github.com/vuejs/vue-router)
-* [Laravel](https://github.com/sptjerry19/backendNetflix)
-* [Axios](https://axios-http.com/)
+### Người dùng
 
-## Features
-- [x] Authentication
-  - [x] Sign up
-  - [x] Sign in
-  - [x] Logout
-  - [x] Admin Page
-  - [x] CRUD (films, songs, categories, genres) + Relation ship
-- [x] Movies
-  - [x] Search movies
-  - [x] watch movies
-  - [x] List of movies by category
-  - [x] List of movies with pagination
-  - [x] List of IMDB with views
-  - [x] Detailed information about the movie
-  - [x] Fully responsive movie slider
-  - [x] Add movie to "Favorites"
-- [x] Songs
-  - [x] Search Songs
-  - [x] Play Songs
-  - [x] List of songs by genre
-  - [x] List of songs with pagination
-  - [x] Detailed information about the song
-  - [x] Fully responsive movie slider
-  - [x] Add song to "Favorites"
-- [x] Responsive
+- 🏠 **Trang chủ**: Tìm kiếm và khám phá các sân thể thao
+- 🔍 **Tìm sân**: Lọc sân theo địa điểm, môn thể thao, giá cả
+- 📅 **Đặt sân**: Xem lịch trống và đặt sân theo giờ
+- 💳 **Thanh toán**: Hỗ trợ nhiều phương thức thanh toán (VNPay, Momo, chuyển khoản)
+- 📱 **Quản lý booking**: Xem lịch sử và trạng thái đặt sân
+- 👤 **Hồ sơ cá nhân**: Quản lý thông tin tài khoản
 
-## Configuration
-To use this project with Laravel authentication, some configuration steps are required.
-Clone project Laravel after migrate Database at [laravel](https://github.com/sptjerry19/backendNetflix).
+### Chủ sân
 
-### installation
-install composer:
-```shell
-composer install
-```
-then run migrate databse:
-```shell
-php artisan migrate
-```
-run serve:
-```shell
-php artisan serve
-```
+- 📊 **Dashboard**: Thống kê doanh thu và booking
+- 🏟️ **Quản lý sân**: Thêm, sửa, xóa thông tin sân và court
+- 📋 **Quản lý booking**: Xem và cập nhật trạng thái đặt sân
+- 💰 **Báo cáo doanh thu**: Thống kê theo ngày, tháng
 
-## Installation
-Clone project:
-```shell
-https://github.com/sptjerry19/frontendNetflix.git
-```
+## 🛠️ Công nghệ sử dụng
 
-Then change into that folder:
-```shell
-cd frontendNetflix
-```
+- **Vue.js 3** - Framework JavaScript
+- **Vue Router 4** - Routing
+- **Vuex 4** - State management
+- **Tailwind CSS** - CSS framework
+- **Axios** - HTTP client
+- **Vite** - Build tool
 
-Install project dependencies:
-```shell
+## 📋 Yêu cầu hệ thống
+
+- Node.js >= 16.0.0
+- npm >= 8.0.0
+
+## 🚀 Cài đặt và chạy
+
+### 1. Clone repository
+
+\`\`\`bash
+git clone <repository-url>
+cd booking_sport_frontend
+\`\`\`
+
+### 2. Cài đặt dependencies
+
+\`\`\`bash
 npm install
-```
-Build for developer:
-```shell
+\`\`\`
+
+### 3. Cấu hình environment
+
+Tạo file \`.env\` từ \`.env.example\`:
+\`\`\`bash
+cp .env.example .env
+\`\`\`
+
+Cập nhật các thông tin cần thiết trong file \`.env\`:
+\`\`\`env
+VUE_APP_API_BASE=http://localhost:8000/api/v1
+VUE_APP_STORAGE_URL=http://localhost:8000/storage/
+VUE_APP_NAME="Booking Sport"
+\`\`\`
+
+### 4. Chạy development server
+
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
-Build for production and preview:
-```shell
-npm run build && npm run preview
-```
+Ứng dụng sẽ chạy tại \`http://localhost:5173\`
 
-Start up a local server:
-```shell
-npm run serve
-```
+### 5. Build cho production
 
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+\`\`\`bash
+npm run build
+\`\`\`
 
-## License  <a href="https://github.com/approxipix/vue-netflix-clone/blob/master/LICENSE"><img src="https://img.shields.io/github/license/elangosundar/awesome-README-templates?color=2b9348" alt="License Badge"/></a>
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/approxipix/vue-netflix-clone/blob/master/LICENSE) file for more information.
+## 📁 Cấu trúc thư mục
+
+\`\`\`
+src/
+├── assets/ # Static assets
+├── components/ # Vue components
+│ ├── Auth/ # Authentication components
+│ ├── Booking/ # Booking related components
+│ ├── Court/ # Court components
+│ ├── Layout/ # Layout components
+│ ├── UI/ # Reusable UI components
+│ └── Venue/ # Venue components
+├── composables/ # Vue composables
+│ ├── useApi.ts # API integration
+│ ├── useAuth.ts # Authentication logic
+│ └── useBooking.ts # Booking logic
+├── middleware/ # Route middleware
+│ ├── auth.ts # Authentication middleware
+│ └── owner.ts # Owner role middleware
+├── router/ # Vue Router configuration
+├── store/ # Vuex store
+├── types/ # TypeScript type definitions
+├── views/ # Page components
+│ ├── auth/ # Authentication pages
+│ ├── booking/ # Booking pages
+│ ├── dashboard/ # Owner dashboard pages
+│ └── venues/ # Venue pages
+├── plugins/ # Vue plugins
+└── main.js # Application entry point
+\`\`\`
+
+## 🔧 Cấu hình
+
+### API Integration
+
+Ứng dụng sử dụng Laravel Sanctum cho authentication. Cấu hình axios client trong \`src/plugins/axios.js\`:
+
+- Tự động thêm CSRF token
+- Xử lý token authentication
+- Redirect khi unauthorized
+
+### State Management
+
+Vuex store được chia thành các modules:
+
+- \`auth\`: Quản lý authentication state
+- \`venue\`: Quản lý venue data
+- \`booking\`: Quản lý booking data
+- \`ui\`: Quản lý UI state (modals, notifications)
+
+### Routing
+
+Router được cấu hình với:
+
+- Public routes (không cần authentication)
+- Protected routes (yêu cầu đăng nhập)
+- Owner routes (yêu cầu role owner)
+
+## 🎨 UI Components
+
+### Các components chính:
+
+- **VenueCard**: Hiển thị thông tin sân
+- **CourtAvailability**: Hiển thị lịch trống của court
+- **BookingForm**: Form đặt sân
+- **PaymentForm**: Form thanh toán
+- **DateTimePicker**: Component chọn ngày giờ
+
+### Styling
+
+- Sử dụng Tailwind CSS cho responsive design
+- Dark mode support (tùy chọn)
+- Mobile-first approach
+
+## 🔐 Authentication
+
+### Sanctum SPA Authentication
+
+1. CSRF cookie được tự động lấy
+2. Token được lưu trong localStorage
+3. Tự động redirect khi session hết hạn
+
+### User Roles
+
+- **Customer**: Đặt sân, xem lịch sử
+- **Owner**: Quản lý sân, xem thống kê
+- **Admin**: Full access
+
+## 💳 Payment Integration
+
+Hỗ trợ các phương thức thanh toán:
+
+- VNPay
+- Momo
+- ZaloPay
+- Chuyển khoản ngân hàng
+
+## 📱 Mobile Support
+
+- Responsive design cho tất cả screen sizes
+- Touch-friendly interactions
+- PWA ready (nếu cần)
+
+## 🧪 Testing
+
+\`\`\`bash
+
+# Unit tests
+
+npm run test:unit
+
+# E2E tests
+
+npm run test:e2e
+\`\`\`
+
+## 📈 Performance
+
+- Lazy loading cho routes
+- Image optimization
+- Bundle splitting
+- Caching strategies
+
+## 🔄 API Endpoints
+
+### Authentication
+
+- \`POST /api/v1/auth/login\` - Đăng nhập
+- \`POST /api/v1/auth/register\` - Đăng ký
+- \`POST /api/v1/auth/logout\` - Đăng xuất
+
+### Venues
+
+- \`GET /api/v1/venues\` - Danh sách sân
+- \`GET /api/v1/venues/{id}\` - Chi tiết sân
+- \`POST /api/v1/venues\` - Tạo sân mới (owner)
+
+### Bookings
+
+- \`GET /api/v1/me/bookings\` - Booking của user
+- \`POST /api/v1/bookings\` - Tạo booking mới
+- \`GET /api/v1/courts/{id}/availability\` - Lịch trống
+
+## 🤝 Contributing
+
+1. Fork repository
+2. Tạo feature branch
+3. Commit changes
+4. Push to branch
+5. Tạo Pull Request
+
+## 📄 License
+
+MIT License
+
+## 🙋‍♂️ Support
+
+Nếu gặp vấn đề, vui lòng tạo issue trên GitHub hoặc liên hệ team phát triển.

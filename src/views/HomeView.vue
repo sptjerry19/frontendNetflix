@@ -1,138 +1,355 @@
 <template>
-  <div>
-    <div
-      class="h-screen flex justify-center items-center bg-cover bg-center"
-      style="
-        background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)),
-          url('https://assets.nflxext.com/ffe/siteui/vlv3/c0a32732-b033-43b3-be2a-8fee037a6146/2fe6e3c0-5613-4625-a0c1-3d605effd10b/IN-en-20210607-popsignuptwoweeks-perspective_alpha_website_large.jpg');
-      "
-    >
-      <div class="absolute top-0 left-0 mt-5 ml-5">
-        <svg viewBox="0 0 111 30" fill="#e50914" class="w-28" focusable="false">
-          <g id="netflix-logo">
-            <path
-              d="M105.06233,14.2806261 L110.999156,30 C109.249227,29.7497422 107.500234,29.4366857 105.718437,29.1554972 L102.374168,20.4686475 L98.9371075,28.4375293 C97.2499766,28.1563408 95.5928391,28.061674 93.9057081,27.8432843 L99.9372012,14.0931671 L94.4680851,-5.68434189e-14 L99.5313525,-5.68434189e-14 L102.593495,7.87421502 L105.874965,-5.68434189e-14 L110.999156,-5.68434189e-14 L105.06233,14.2806261 Z M90.4686475,-5.68434189e-14 L85.8749649,-5.68434189e-14 L85.8749649,27.2499766 C87.3746368,27.3437061 88.9371075,27.4055675 90.4686475,27.5930265 L90.4686475,-5.68434189e-14 Z M81.9055207,26.93692 C77.7186241,26.6557316 73.5307901,26.4064111 69.250164,26.3117443 L69.250164,-5.68434189e-14 L73.9366389,-5.68434189e-14 L73.9366389,21.8745899 C76.6248008,21.9373887 79.3120255,22.1557784 81.9055207,22.2804387 L81.9055207,26.93692 Z M64.2496954,10.6561065 L64.2496954,15.3435186 L57.8442216,15.3435186 L57.8442216,25.9996251 L53.2186709,25.9996251 L53.2186709,-5.68434189e-14 L66.3436123,-5.68434189e-14 L66.3436123,4.68741213 L57.8442216,4.68741213 L57.8442216,10.6561065 L64.2496954,10.6561065 Z M45.3435186,4.68741213 L45.3435186,26.2498828 C43.7810479,26.2498828 42.1876465,26.2498828 40.6561065,26.3117443 L40.6561065,4.68741213 L35.8121661,4.68741213 L35.8121661,-5.68434189e-14 L50.2183897,-5.68434189e-14 L50.2183897,4.68741213 L45.3435186,4.68741213 Z M30.749836,15.5928391 C28.687787,15.5928391 26.2498828,15.5928391 24.4999531,15.6875059 L24.4999531,22.6562939 C27.2499766,22.4678976 30,22.2495079 32.7809542,22.1557784 L32.7809542,26.6557316 L19.812541,27.6876933 L19.812541,-5.68434189e-14 L32.7809542,-5.68434189e-14 L32.7809542,4.68741213 L24.4999531,4.68741213 L24.4999531,10.9991564 C26.3126816,10.9991564 29.0936358,10.9054269 30.749836,10.9054269 L30.749836,15.5928391 Z M4.78114163,12.9684132 L4.78114163,29.3429562 C3.09401069,29.5313525 1.59340144,29.7497422 0,30 L0,-5.68434189e-14 L4.4690224,-5.68434189e-14 L10.562377,17.0315868 L10.562377,-5.68434189e-14 L15.2497891,-5.68434189e-14 L15.2497891,28.061674 C13.5935889,28.3437998 11.906458,28.4375293 10.1246602,28.6868498 L4.78114163,12.9684132 Z"
-              id="Fill-14"
-            ></path>
-          </g>
-        </svg>
-      </div>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-6xl font-bold mb-6">
+            Đặt sân thể thao
+            <span class="text-yellow-400">dễ dàng</span>
+          </h1>
+          <p class="text-xl md:text-2xl mb-8 text-blue-100">
+            Tìm và đặt sân bóng đá, cầu lông, tennis gần bạn chỉ trong vài phút
+          </p>
 
-      <div class="space-y-5">
-        <p class="text-white font-bold text-5xl flex flex-col items-center">
-          <span>Unlimited movies, TV <br /></span>
-          <span> shows and more. </span>
-        </p>
-        <p class="text-white font-semibold text-3xl flex flex-col items-center">
-          Watch anywhere. Cancel anytime.
-        </p>
-        <p class="text-white text-lg flex flex-col items-center">
-          Ready to watch? Enter your email to create or restart your membership.
-        </p>
-        <div class="flex flex-row items-center justify-center">
-          <router-link to="/home">
-            <button
-              class="p-4 w-96 text-l font-semibold bg-red-600 hover:bg-red-700 text-white"
+          <!-- Search Bar -->
+          <div class="max-w-4xl mx-auto mb-8">
+            <div class="bg-white rounded-lg p-6 shadow-lg">
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Địa điểm</label
+                  >
+                  <input
+                    v-model="searchForm.location"
+                    type="text"
+                    placeholder="Nhập địa điểm..."
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Môn thể thao</label
+                  >
+                  <select
+                    v-model="searchForm.sport_id"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+                  >
+                    <option value="">Tất cả</option>
+                    <option
+                      v-for="sport in availableSports"
+                      :key="sport.id"
+                      :value="sport.id"
+                    >
+                      {{ sport.name }}
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Ngày</label
+                  >
+                  <input
+                    v-model="searchForm.date"
+                    type="date"
+                    :min="today"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+                  />
+                </div>
+                <div class="flex items-end">
+                  <button
+                    @click="searchVenues"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md font-medium transition-colors"
+                  >
+                    Tìm sân
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Sports -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">
+          Môn thể thao phổ biến
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div
+            v-for="sport in popularSports"
+            :key="sport.type"
+            @click="searchBySport(sport.type)"
+            class="text-center cursor-pointer group hover:transform hover:scale-105 transition-all duration-300"
+          >
+            <div
+              class="bg-white rounded-full p-8 shadow-lg mb-4 group-hover:shadow-xl"
             >
-              Get Started >
-            </button>
-          </router-link>
+              <div class="text-4xl mb-2">{{ sport.icon }}</div>
+              <h3 class="text-lg font-semibold text-gray-900">
+                {{ sport.name }}
+              </h3>
+              <p class="text-sm text-gray-500 mt-2">{{ sport.count }}+ sân</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <hr />
-    <div class="h-screen flex items-center justify-center bg-black p-5">
-      <div class="space-y-5 p-5">
-        <p class="text-white font-bold text-4xl">Enjoy on your TV.</p>
-        <p class="text-white font-semiboldbold text-xl">
-          Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray
-          players and more.
-        </p>
-      </div>
-      <div>
-        <img
-          alt="TV"
-          src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/tv.png"
-        />
-      </div>
-    </div>
-    <hr />
-    <div class="h-screen flex items-center justify-center bg-black p-5">
-      <div>
-        <img
-          alt=""
-          class="our-story-card-img"
-          src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/mobile-0819.jpg"
-          data-uia="our-story-card-img"
-        />
-      </div>
-      <div class="space-y-5">
-        <p class="text-white font-bold text-4xl">
-          Download your shows to watch offline.
-        </p>
-        <p class="text-white font-semiboldbold text-xl">
-          Save your favourites easily and always have something to watch.
-        </p>
-      </div>
-    </div>
-    <hr />
-    <div class="h-screen flex items-center justify-center bg-black p-5">
-      <div class="space-y-5 p-5">
-        <p class="text-white font-bold text-4xl">Watch everywhere.</p>
-        <p class="text-white font-semiboldbold text-xl">
-          Stream unlimited movies and TV shows on your phone, tablet, laptop,
-          and TV.
-        </p>
-      </div>
-      <div>
-        <img
-          alt=""
-          class="our-story-card-img"
-          src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/device-pile-in.png"
-          data-uia="our-story-card-img"
-        />
-      </div>
-    </div>
-    <hr />
-    <div class="h-screen flex items-center justify-center bg-black p-5">
-      <div class="p-5">
-        <img
-          alt=""
-          class="our-story-card-img"
-          src="https://occ-0-5556-3662.1.nflxso.net/dnm/api/v6/19OhWN2dO19C9txTON9tvTFtefw/AAAABVxdX2WnFSp49eXb1do0euaj-F8upNImjofE77XStKhf5kUHG94DPlTiGYqPeYNtiox-82NWEK0Ls3CnLe3WWClGdiJP.png?r=5cf"
-          data-uia="our-story-card-img"
-        />
-      </div>
-      <div class="space-y-5">
-        <p class="text-white font-bold text-4xl">
-          Create profiles for children.
-        </p>
-        <p class="text-white font-semiboldbold text-xl">
-          Send children on adventures with their favourite characters in a space
-          made just for them—free with your membership.
-        </p>
-      </div>
-    </div>
-    <hr />
-    <div class="min-h-screen bg-black space-y-10">
-      <p class="p-5 text-white font-bold text-5xl flex justify-center">
-        Frequently Asked Questions
-      </p>
-      <div class="space-y-5 flex flex-col justify-center items-center">
-        <div class="p-5 bg-[#303030] w-3/4">
-          <p class="text-3xl text-white">What is Netflix ?</p>
+    </section>
+
+    <!-- Featured Venues -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Sân được ưa chuộng
+          </h2>
+          <p class="text-lg text-gray-600">
+            Những địa điểm có rating cao và được đánh giá tốt
+          </p>
         </div>
-        <div class="p-5 bg-[#303030] w-3/4">
-          <p class="text-3xl text-white">How much does Netflix cost ?</p>
+
+        <!-- Loading State -->
+        <div v-if="loading" class="flex justify-center py-8">
+          <div
+            class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"
+          ></div>
         </div>
-        <div class="p-5 bg-[#303030] w-3/4">
-          <p class="text-3xl text-white">Where can I watch ?</p>
+
+        <!-- Venues Grid -->
+        <div
+          v-else
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <VenueCard
+            v-for="venue in featuredVenues"
+            :key="venue.id"
+            :venue="venue"
+          />
         </div>
-        <div class="p-5 bg-[#303030] w-3/4">
-          <p class="text-3xl text-white">Is Netflix good for kids ?</p>
+
+        <div class="text-center mt-12">
+          <RouterLink
+            to="/venues"
+            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-md font-medium transition-colors"
+          >
+            Xem tất cả sân
+            <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </RouterLink>
         </div>
       </div>
-    </div>
-    <hr />
+    </section>
+
+    <!-- Features -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Tại sao chọn chúng tôi?
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div
+              class="bg-blue-100 rounded-full p-6 w-20 h-20 mx-auto mb-4 flex items-center justify-center"
+            >
+              <svg
+                class="w-10 h-10 text-blue-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Đặt sân nhanh chóng
+            </h3>
+            <p class="text-gray-600">
+              Tìm và đặt sân chỉ trong vài phút với giao diện thân thiện
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="bg-green-100 rounded-full p-6 w-20 h-20 mx-auto mb-4 flex items-center justify-center"
+            >
+              <svg
+                class="w-10 h-10 text-green-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M10 17L6 13L7.41 11.59L10 14.17L16.59 7.58L18 9L10 17Z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Thanh toán an toàn
+            </h3>
+            <p class="text-gray-600">
+              Hỗ trợ nhiều phương thức thanh toán với bảo mật cao
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="bg-yellow-100 rounded-full p-6 w-20 h-20 mx-auto mb-4 flex items-center justify-center"
+            >
+              <svg
+                class="w-10 h-10 text-yellow-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Hỗ trợ 24/7
+            </h3>
+            <p class="text-gray-600">
+              Đội ngũ hỗ trợ khách hàng luôn sẵn sàng giúp đỡ bạn
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-blue-600 py-16">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-white mb-4">Sẵn sàng bắt đầu?</h2>
+        <p class="text-xl text-blue-100 mb-8">
+          Tạo tài khoản để trải nghiệm đặt sân nhanh chóng
+        </p>
+        <div class="space-x-4">
+          <RouterLink
+            to="/auth/register"
+            class="inline-block bg-white text-blue-600 px-8 py-3 rounded-md font-medium hover:bg-gray-50 transition-colors"
+          >
+            Đăng ký ngay
+          </RouterLink>
+          <RouterLink
+            to="/venues"
+            class="inline-block border-2 border-white text-white px-8 py-3 rounded-md font-medium hover:bg-white hover:text-blue-600 transition-colors"
+          >
+            Khám phá sân
+          </RouterLink>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
+
+<script>
+import { ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+import { useApi } from "@/composables/useApi";
+import VenueCard from "@/components/Venue/VenueCard.vue";
+
+export default {
+  name: "HomeView",
+  components: {
+    VenueCard,
+  },
+  setup() {
+    const router = useRouter();
+    const store = useStore();
+    const api = useApi();
+
+    // Reactive data
+    const loading = ref(false);
+    const featuredVenues = ref([]);
+    const availableSports = ref([]);
+    const popularSports = ref([]);
+    const searchForm = ref({
+      location: "",
+      sport_id: "",
+      date: "",
+    });
+
+    // Computed
+    const today = computed(() => {
+      return new Date().toISOString().split("T")[0];
+    });
+
+    // Methods
+    const loadFeaturedVenues = async () => {
+      try {
+        loading.value = true;
+        const response = await api.getVenues({ featured: true, per_page: 6 });
+        featuredVenues.value = response.data.data || [];
+      } catch (error) {
+        console.error("Failed to load featured venues:", error);
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    const loadSports = async () => {
+      try {
+        const response = await api.getSportsActive();
+        availableSports.value = response.data.data || [];
+      } catch (error) {
+        console.error("Failed to load sports:", error);
+      }
+    };
+
+    const loadPopularSports = async () => {
+      try {
+        const response = await api.getSportsPopular();
+        popularSports.value = response.data.data || [];
+      } catch (error) {
+        console.error("Failed to load popular sports:", error);
+      }
+    };
+
+    const searchVenues = () => {
+      const query = new URLSearchParams();
+
+      if (searchForm.value.location)
+        query.append("location", searchForm.value.location);
+      if (searchForm.value.sport_id)
+        query.append("sport_id", searchForm.value.sport_id);
+      if (searchForm.value.date) query.append("date", searchForm.value.date);
+
+      router.push(`/venues?${query.toString()}`);
+    };
+
+    const searchBySport = (sportType) => {
+      router.push(`/venues?sport_id=${sportType.id}`);
+    };
+
+    // Initialize
+    onMounted(() => {
+      searchForm.value.date = today.value;
+      loadFeaturedVenues();
+      loadSports();
+      loadPopularSports();
+    });
+
+    return {
+      loading,
+      featuredVenues,
+      availableSports,
+      popularSports,
+      searchForm,
+      today,
+      searchVenues,
+      searchBySport,
+    };
+  },
+};
+</script>
